@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var randNum: Int = 0
+    
+    private var activities: [String] =
+    [
+        "Potato",
+        "Yes",
+        "No",
+        "Sell",
+        "Jump",
+        "Easy Breezy"
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack{
+            Text(activities[randNum]).font(.largeTitle)
+            
+            Button(action: {
+                randNum = Int.random(in: 1..<activities.count)
+            },
+                   label: {
+                Text("Generate Text")
+            })
+            .padding()
         }
-        .padding()
     }
 }
 
