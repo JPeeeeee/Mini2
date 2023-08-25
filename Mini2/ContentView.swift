@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var text: String = "DEBUG BASE"
+    @ObservedObject var ticketManager: TicketTextManager = TicketTextManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack{
+            Text(text).font(.largeTitle)
+            
+            Button(action: {
+                text = ticketManager.PickTicket()
+            },
+                   label: {
+                Text("Generate Text")
+            })
+            .padding()
         }
-        .padding()
     }
 }
 
