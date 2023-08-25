@@ -11,6 +11,7 @@
 		7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2742592A964B46001ABC08 /* ContentView.swift */; };
 		7C27425C2A964B47001ABC08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C27425B2A964B47001ABC08 /* Assets.xcassets */; };
 		7C27425F2A964B47001ABC08 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C27425E2A964B47001ABC08 /* Preview Assets.xcassets */; };
+		F541001B2A98D094009784D3 /* TicketTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F541001A2A98D094009784D3 /* TicketTextManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		7C2742592A964B46001ABC08 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7C27425B2A964B47001ABC08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C27425E2A964B47001ABC08 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F541001A2A98D094009784D3 /* TicketTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTextManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				7C2742592A964B46001ABC08 /* ContentView.swift */,
 				7C27425B2A964B47001ABC08 /* Assets.xcassets */,
 				7C27425D2A964B47001ABC08 /* Preview Content */,
+				F541001A2A98D094009784D3 /* TicketTextManager.swift */,
 			);
 			path = Mini2;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F541001B2A98D094009784D3 /* TicketTextManager.swift in Sources */,
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
 			);

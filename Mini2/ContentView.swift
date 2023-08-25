@@ -9,24 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var randNum: Int = 0
-    
-    private var activities: [String] =
-    [
-        "Potato",
-        "Yes",
-        "No",
-        "Sell",
-        "Jump",
-        "Easy Breezy"
-    ]
+    @State var text: String = "DEBUG BASE"
+    @ObservedObject var ticketManager: TicketTextManager = TicketTextManager()
     
     var body: some View {
         VStack{
-            Text(activities[randNum]).font(.largeTitle)
+            Text(text).font(.largeTitle)
             
             Button(action: {
-                randNum = Int.random(in: 1..<activities.count)
+                text = ticketManager.PickTicket()
             },
                    label: {
                 Text("Generate Text")
