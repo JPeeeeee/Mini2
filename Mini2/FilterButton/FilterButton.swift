@@ -13,7 +13,7 @@ struct FilterButton: View {
     var label: String = ""
     
     @State var selected: Bool = false
-    @EnvironmentObject var selectedTags: SelectedTags
+    @EnvironmentObject var firestoreManager: FirestoreManager
     
     private var buttonColor: Color {
         if selected {
@@ -33,15 +33,15 @@ struct FilterButton: View {
     
     var body: some View {
         Button {
-            if selectedTags.arr.contains(label) {
+            if firestoreManager.selectedTags.contains(label) {
                 selected = false
-                selectedTags.arr.remove(label)
+                firestoreManager.remove(filter: label)
             } else {
                 selected = true
-                selectedTags.arr.insert(label)
+                firestoreManager.insert(filter: label)
             }
             
-            print(selectedTags.arr)
+            print(firestoreManager.selectedTags)
         } label: {
             Text(label)
                 .fontWeight(.bold)
@@ -59,7 +59,7 @@ struct FilterButton: View {
         
         }
         .onAppear {
-            if selectedTags.arr.contains(label) {
+            if firestoreManager.selectedTags.contains(label) {
                 selected = true
             } else {
                 selected = false

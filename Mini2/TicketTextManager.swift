@@ -35,9 +35,9 @@ class TicketTextManager: ObservableObject{
         ]
     }
     
-    public func filterTickets(selectedTags: SelectedTags) {
+    public func filterTickets(selectedTags: Set<String>) {
         // Adds all the tickets that are cointained by the startingTags
-        filteredTickets = tickets.filter{selectedTags.arr.contains($0.tags)}
+        filteredTickets = tickets.filter{selectedTags.contains($0.tags)}
     }
     
     public func PickTicket() -> String{

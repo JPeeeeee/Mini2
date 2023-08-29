@@ -7,16 +7,32 @@
 
 import SwiftUI
 
-class SelectedTags: ObservableObject {
-    @Published var arr: Set<String> = Set<String>()
-}
 
 struct ContentView: View {
     
-    @StateObject var selectedTags = SelectedTags()
-    
     @State var text: String = "DEBUG BASE"
-    @ObservedObject var ticketManager: TicketTextManager = TicketTextManager()
+    @StateObject var ticketManager = TicketTextManager()
+    
+    @StateObject var firestoreManager = FirestoreManager()
+
+    
+//   Tickets test
+    
+//    let ticketsTest = [
+//        "lorem",
+//        "ipsum",
+//        "fasfas",
+//        "fdsafasdfa",
+//        "porqewporpqew",
+//        "faca coisas legais",
+//        "fasjlkdfjlkasdjfa"
+//    ]
+    
+    let ticketsTest = [
+        "Mete ssss",
+    ]
+    
+    
     
     var body: some View {
         NavigationStack {
@@ -24,8 +40,8 @@ struct ContentView: View {
                 Text(text).font(.largeTitle)
                 
                 Button(action: {
-                    ticketManager.filterTickets(selectedTags: selectedTags)
-                    text = ticketManager.PickTicket()
+//                    ticketManager.filterTickets(selectedTags: firestoreManager.selectedTags)
+//                    text = ticketManager.PickTicket()
                 },
                        label: {
                     Text("Generate Text")
@@ -39,9 +55,36 @@ struct ContentView: View {
                     Text("Filter Screen")
                 }
                 
+                // debug only
+                Button(action: {
+                    Task {
+                        try await firestoreManager.uploadFilter(filter: "Parque", ticketsArr: ticketsTest)
+                    }
+                },
+                       label: {
+                    Text("Send data")
+                })
+                .padding()
+                
+                Button(action: {
+                    
+                    if !firestoreManager.selectedTags.isEmpty {
+                        Task {
+                            let data = try await firestoreManager.getFiltersTickets()
+                            let pickIndex = Int.random(in: 0..<data.count)
+                            text = data[pickIndex]
+                        }
+                    } else {
+                        text = "Select your filters!"
+                    }
+                },
+                       label: {
+                    Text("Print random ticket from Praia")
+                })
+                .padding()
             }
         }
-        .environmentObject(selectedTags)
+        .environmentObject(firestoreManager)
     }
 }
 
