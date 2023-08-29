@@ -10,7 +10,7 @@ import WrappingHStack
 
 struct FilterScreen: View {
     
-    @EnvironmentObject var selectedTags: SelectedTags
+    @EnvironmentObject var firestoreManager: FirestoreManager
     
     var filtros: [String] = [
         "Praia",
@@ -35,7 +35,8 @@ struct FilterScreen: View {
 
 struct FilterScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FilterScreen()
-            .environmentObject(SelectedTags())
+//        FilterScreen()
+//            .environmentObject(SelectedTags())
+        ContentView()
     }
 }
