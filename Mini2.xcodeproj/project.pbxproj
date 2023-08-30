@@ -85,7 +85,6 @@
 		7C2742562A964B46001ABC08 /* Mini2 */ = {
 			isa = PBXGroup;
 			children = (
-				7C34245C2A9CE63100E77B14 /* Models */,
 				7C3424592A9CDA6600E77B14 /* Firestore */,
 				7C3424562A9CD76F00E77B14 /* Storage */,
 				7C0F6B8A2A98F1E6004D0B72 /* FilterButton */,
@@ -123,13 +122,6 @@
 				7C34245A2A9CDA7400E77B14 /* FilterManager.swift */,
 			);
 			path = Firestore;
-			sourceTree = "<group>";
-		};
-		7C34245C2A9CE63100E77B14 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

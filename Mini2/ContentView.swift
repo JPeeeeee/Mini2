@@ -18,36 +18,24 @@ struct ContentView: View {
     
 //   Tickets test
     
-//    let ticketsTest = [
-//        "lorem",
-//        "ipsum",
-//        "fasfas",
-//        "fdsafasdfa",
-//        "porqewporpqew",
-//        "faca coisas legais",
-//        "fasjlkdfjlkasdjfa"
-//    ]
-    
     let ticketsTest = [
-        "Mete ssss",
+        "lorem3",
+        "ipsum3",
+        "ipsum2",
+        "fasfas3",
+        "fdsafasdfa3",
+        "porqewporpqe2w",
+        "faca coisas legai2s",
+        "fasjlkdfjlkasdjf2a"
     ]
+
     
     
     
     var body: some View {
         NavigationStack {
             VStack{
-                Text(text).font(.largeTitle)
-                
-                Button(action: {
-//                    ticketManager.filterTickets(selectedTags: firestoreManager.selectedTags)
-//                    text = ticketManager.PickTicket()
-                },
-                       label: {
-                    Text("Generate Text")
-                })
-                .padding()
-                
+                Text(firestoreManager.currentTicket).font(.largeTitle)
                 
                 NavigationLink {
                     FilterScreen()
@@ -58,7 +46,7 @@ struct ContentView: View {
                 // debug only
                 Button(action: {
                     Task {
-                        try await firestoreManager.uploadFilter(filter: "Parque", ticketsArr: ticketsTest)
+                        try await firestoreManager.uploadFilter(filter: "Bar", ticketsArr: ticketsTest)
                     }
                 },
                        label: {
@@ -67,24 +55,23 @@ struct ContentView: View {
                 .padding()
                 
                 Button(action: {
-                    
                     if !firestoreManager.selectedTags.isEmpty {
-                        Task {
-                            let data = try await firestoreManager.getFiltersTickets()
-                            let pickIndex = Int.random(in: 0..<data.count)
-                            text = data[pickIndex]
-                        }
+                        firestoreManager.pickTicket()
+                        print(firestoreManager.currentTicket)
                     } else {
-                        text = "Select your filters!"
+                        print("n tem nada marcado cara")
                     }
                 },
                        label: {
-                    Text("Print random ticket from Praia")
+                    Text("print data")
                 })
                 .padding()
             }
         }
         .environmentObject(firestoreManager)
+        .onChange(of: firestoreManager.selectedTags) { _ in
+            firestoreManager.populatePossibleTickets()
+        }
     }
 }
 

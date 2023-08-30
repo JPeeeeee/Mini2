@@ -8,12 +8,15 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Combine
 
 class FirestoreManager: ObservableObject {
     @Published var selectedTags: Set<String> = Set<String>()
     
+    private var ticketsCancellable: AnyCancellable?
     
-    var possibleTickets: [String] = [String]()
+    @Published var possibleTickets: Set<String> = Set<String>()
+    @Published var currentTicket: String = ""
     
     func insert(filter: String) {
         possibleTickets = []
@@ -30,21 +33,36 @@ class FirestoreManager: ObservableObject {
         try await FilterManager.shared.createNewFilter(filter: filter, ticketsArr: ticketsArr)
     }
     
-    func getFiltersTickets() async throws -> [String] {
-        
-        if possibleTickets.isEmpty {
-            print("request")
-            for item in selectedTags {
-                let currentFilter = try await FilterManager.shared.getFilter(filter: item)
-                
-                currentFilter.tickets?.forEach({ item in
-                    possibleTickets.append(item)
-                })
-            }
+    func pickTicket() {
+        if !possibleTickets.isEmpty {
             
-            return possibleTickets
+            let res = possibleTickets.randomElement()!
+            
+            // remove ticket de atividades possiveis para nao repetir
+            possibleTickets.remove(res)
+            
+            currentTicket = res
+        } else {
+            currentTicket = "No more activities today!"
+            
+            // para caso queira repetir as atividades depois de ter repetido todas
+             populatePossibleTickets()
         }
-        
-        return possibleTickets
+    }
+    
+    func populatePossibleTickets() {
+        if !selectedTags.isEmpty {
+            let publisher = FilterManager.shared.getTickets(filters: selectedTags)
+            
+            ticketsCancellable = publisher
+                .sink(receiveCompletion: { error in
+                    print("error \(error)")
+                }, receiveValue: { tickets in
+                    tickets.forEach { item in
+                        self.possibleTickets.insert(item)
+                    }
+                    self.ticketsCancellable?.cancel()
+                })
+        }
     }
 }
