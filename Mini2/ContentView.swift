@@ -7,11 +7,26 @@
 
 import SwiftUI
 
+func check() -> Bool {
+        if let referenceDate = UserDefaults.standard.object(forKey: "reference") as? Date {
+            // reference date has been set, now check if date is not today
+            if !Calendar.current.isDateInToday(referenceDate) {
+                // if date is not today, do things
+                // update the reference date to today
+                UserDefaults.standard.set(Date(), forKey: "reference")
+                return true
+            }
+        } else {
+            // reference date has never been set, so set a reference date into UserDefaults
+            UserDefaults.standard.set(Date(), forKey: "reference")
+            return true
+        }
+        return false
+    }
 
 struct ContentView: View {
     
     @State var text: String = "DEBUG BASE"
-    @StateObject var ticketManager = TicketTextManager()
     
     @StateObject var firestoreManager = FirestoreManager()
 
@@ -69,6 +84,13 @@ struct ContentView: View {
             }
         }
         .environmentObject(firestoreManager)
+        .onAppear {
+            if check() {
+                
+            } else {
+                
+            }
+        }
         .onChange(of: firestoreManager.selectedTags) { _ in
             firestoreManager.populatePossibleTickets()
         }
