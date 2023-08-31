@@ -23,7 +23,6 @@
 		7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3424572A9CD78500E77B14 /* StorageManager.swift */; };
 		7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34245A2A9CDA7400E77B14 /* FilterManager.swift */; };
 		7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */; };
-		F541001B2A98D094009784D3 /* TicketTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F541001A2A98D094009784D3 /* TicketTextManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +37,6 @@
 		7C3424572A9CD78500E77B14 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		7C34245A2A9CDA7400E77B14 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		F541001A2A98D094009784D3 /* TicketTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTextManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,18 +83,15 @@
 		7C2742562A964B46001ABC08 /* Mini2 */ = {
 			isa = PBXGroup;
 			children = (
-				7C34245C2A9CE63100E77B14 /* Models */,
+				7C3424632AA0AD2C00E77B14 /* Components */,
 				7C3424592A9CDA6600E77B14 /* Firestore */,
 				7C3424562A9CD76F00E77B14 /* Storage */,
-				7C0F6B8A2A98F1E6004D0B72 /* FilterButton */,
 				7C2742572A964B46001ABC08 /* Mini2App.swift */,
 				7C2742592A964B46001ABC08 /* ContentView.swift */,
-				7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */,
 				7C0F6B902A98F531004D0B72 /* FilterScreen.swift */,
 				7C27425B2A964B47001ABC08 /* Assets.xcassets */,
 				7C3424492A9CD52A00E77B14 /* GoogleService-Info.plist */,
 				7C27425D2A964B47001ABC08 /* Preview Content */,
-				F541001A2A98D094009784D3 /* TicketTextManager.swift */,
 			);
 			path = Mini2;
 			sourceTree = "<group>";
@@ -121,15 +116,17 @@
 			isa = PBXGroup;
 			children = (
 				7C34245A2A9CDA7400E77B14 /* FilterManager.swift */,
+				7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
 		};
-		7C34245C2A9CE63100E77B14 /* Models */ = {
+		7C3424632AA0AD2C00E77B14 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7C0F6B8A2A98F1E6004D0B72 /* FilterButton */,
 			);
-			path = Models;
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F541001B2A98D094009784D3 /* TicketTextManager.swift in Sources */,
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
 				7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
