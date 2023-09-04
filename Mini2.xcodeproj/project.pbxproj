@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				7C3424632AA0AD2C00E77B14 /* Components */,
-				7C3424592A9CDA6600E77B14 /* Firestore */,
+				7C3424592A9CDA6600E77B14 /* Managers */,
 				7C3424562A9CD76F00E77B14 /* Storage */,
 				7C2742572A964B46001ABC08 /* Mini2App.swift */,
 				7C2742592A964B46001ABC08 /* ContentView.swift */,
@@ -115,13 +115,13 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
-		7C3424592A9CDA6600E77B14 /* Firestore */ = {
+		7C3424592A9CDA6600E77B14 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				7C34245A2A9CDA7400E77B14 /* FilterManager.swift */,
 				7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */,
 			);
-			path = Firestore;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		7C3424632AA0AD2C00E77B14 /* Components */ = {

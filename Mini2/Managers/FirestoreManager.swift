@@ -15,8 +15,9 @@ class FirestoreManager: ObservableObject {
     
     private var ticketsCancellable: AnyCancellable?
     
-    @Published var possibleTickets: Set<String> = Set<String>()
+    @Published var possibleTickets: Set<DBFilter> = Set<DBFilter>()
     @Published var currentTicket: String = ""
+    @Published var currentTicketTags: [String] = []
     
     func insert(filter: String) {
         possibleTickets = []
@@ -29,21 +30,23 @@ class FirestoreManager: ObservableObject {
     }
     
     // debug only
-    func uploadFilter(filter: String, ticketsArr: [String]) async throws {
-        try await FilterManager.shared.createNewFilter(filter: filter, ticketsArr: ticketsArr)
+    func uploadFilter(filters: [String], ticketsArr: [String]) async throws {
+        try await FilterManager.shared.createNewFilter(filters: filters, ticketsArr: ticketsArr)
     }
     
     func pickTicket() {
         if !possibleTickets.isEmpty {
             
-            let res = possibleTickets.randomElement()!
+            let res: DBFilter = possibleTickets.randomElement()!
             
             // remove ticket de atividades possiveis para nao repetir
             possibleTickets.remove(res)
             
-            currentTicket = res
+            currentTicket = res.tickets?.randomElement() ?? "No more activities today!"
+            currentTicketTags = res.filter_name ?? []
         } else {
             currentTicket = "No more activities today!"
+            currentTicketTags = []
             
             // para caso queira repetir as atividades depois de ter repetido todas
              populatePossibleTickets()
@@ -58,6 +61,9 @@ class FirestoreManager: ObservableObject {
                 .sink(receiveCompletion: { error in
                     print("error \(error)")
                 }, receiveValue: { tickets in
+                    
+                    print(tickets)
+                    
                     tickets.forEach { item in
                         self.possibleTickets.insert(item)
                     }

@@ -52,6 +52,11 @@ struct ContentView: View {
             VStack{
                 Text(firestoreManager.currentTicket).font(.largeTitle)
                 
+                ForEach(firestoreManager.currentTicketTags, id: \.self) { item in
+                    Text(item)
+                        .font(.largeTitle)
+                }
+                
                 NavigationLink {
                     FilterScreen()
                 } label: {
@@ -61,7 +66,7 @@ struct ContentView: View {
                 // debug only
                 Button(action: {
                     Task {
-                        try await firestoreManager.uploadFilter(filter: "Bar", ticketsArr: ticketsTest)
+                        try await firestoreManager.uploadFilter(filters: ["Bar"], ticketsArr: ticketsTest)
                     }
                 },
                        label: {
@@ -90,9 +95,6 @@ struct ContentView: View {
             } else {
                 
             }
-        }
-        .onChange(of: firestoreManager.selectedTags) { _ in
-            firestoreManager.populatePossibleTickets()
         }
     }
 }
