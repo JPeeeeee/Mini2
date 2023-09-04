@@ -13,30 +13,37 @@ struct FilterScreen: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
     
     var filtros: [String] = [
-        "Praia",
-        "Parque",
-        "Academia",
-        "Jogos",
-        "Em casa",
-        "Bar",
-        "Sair com amigos",
-        "Ao ar livre",
-        "Livros",
-        "Artesanato",
-        "Fora deste mundo!"
+        "Fora de casa",
+        "Produtividade",
+        "Atividades físicas",
+        "Criatividade",
+        "Fotografia",
+        "Autocuidado",
+        "Música",
+        "Com pessoas",
+        "Sobre percepção",
+        "Trabalho",
+        "Comida",
+        "Sem tech",
+        "Com companheiro(a)",
+        "Pets",
+        "Escrita"
     ]
     
     var body: some View {
-        WrappingHStack (0..<filtros.count, id: \.self, alignment: .center) { i in
+        WrappingHStack (0..<filtros.count, id: \.self, alignment: .leading) { i in
             FilterButton(label: filtros[i])
+        }
+        .onDisappear {
+            firestoreManager.populatePossibleTickets()
         }
     }
 }
 
 struct FilterScreen_Previews: PreviewProvider {
     static var previews: some View {
-//        FilterScreen()
-//            .environmentObject(SelectedTags())
-        ContentView()
+        FilterScreen()
+            .environmentObject(FirestoreManager())
+//        ContentView()
     }
 }

@@ -44,7 +44,6 @@ struct FilterButton: View {
             print(firestoreManager.selectedTags)
         } label: {
             Text(label)
-                .fontWeight(.bold)
                 .foregroundColor(textColor)
                 .padding(.horizontal)
                 .padding(.vertical, 8)
@@ -52,7 +51,7 @@ struct FilterButton: View {
                 .cornerRadius(100)
                 .overlay(
                     RoundedRectangle(cornerRadius: 100)
-                        .stroke(.black, lineWidth: 4)
+                        .stroke(.black, lineWidth: 1)
                 )
                 .padding()
                 .buttonStyle(.bordered)
@@ -65,5 +64,13 @@ struct FilterButton: View {
                 selected = false
             }
         }
+    }
+}
+
+struct FilterButton_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterScreen()
+            .environmentObject(FirestoreManager())
+//        ContentView()
     }
 }
