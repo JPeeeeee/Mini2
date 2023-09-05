@@ -12,31 +12,69 @@ struct FilterScreen: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     
-    var filtros: [String] = [
+    var filtros1: [String] = [
+        "Criatividade",
+        "Fotografia",
+        "Música",
+        "Escrita",
+        "Percepção do tempo e mindfulness"
+    ]
+    
+    var filtros2: [String] = [
         "Fora de casa",
         "Produtividade",
         "Atividades físicas",
-        "Criatividade",
-        "Fotografia",
         "Autocuidado",
-        "Música",
-        "Com pessoas",
-        "Sobre percepção",
         "Trabalho",
         "Comida",
         "Sem tech",
+    ]
+    
+    var filtros3: [String] = [
+        "Com pessoas",
         "Com companheiro(a)",
         "Pets",
-        "Escrita"
     ]
     
     var body: some View {
-        WrappingHStack (0..<filtros.count, id: \.self, alignment: .leading) { i in
-            FilterButton(label: filtros[i])
+        
+        ScrollView {
+            VStack (alignment: .leading) {
+                Text("Incentivo a:")
+                    .padding()
+                    .foregroundColor(.white)
+                    .bold()
+                
+                WrappingHStack (0..<filtros1.count, id: \.self, alignment: .leading) { i in
+                    FilterButton(label: filtros1[i])
+                }
+                
+                Text("Relacionado a:")
+                    .padding()
+                    .foregroundColor(.white)
+                    .bold()
+                
+                WrappingHStack (0..<filtros2.count, id: \.self, alignment: .leading) { i in
+                    FilterButton(label: filtros2[i])
+                }
+                
+                Text("Com quem?")
+                    .padding()
+                    .foregroundColor(.white)
+                    .bold()
+                
+                WrappingHStack (0..<filtros3.count, id: \.self, alignment: .leading) { i in
+                    FilterButton(label: filtros3[i])
+                }
+            }
+            .padding(.bottom, 32)
+            .padding()
+            .onDisappear {
+                firestoreManager.populatePossibleTickets()
+            }
         }
-        .onDisappear {
-            firestoreManager.populatePossibleTickets()
-        }
+        .navigationBarBackButtonHidden()
+        .background(.black)
     }
 }
 
@@ -44,6 +82,6 @@ struct FilterScreen_Previews: PreviewProvider {
     static var previews: some View {
         FilterScreen()
             .environmentObject(FirestoreManager())
-//        ContentView()
+        //        ContentView()
     }
 }

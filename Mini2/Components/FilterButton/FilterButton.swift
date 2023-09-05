@@ -17,17 +17,17 @@ struct FilterButton: View {
     
     private var buttonColor: Color {
         if selected {
-            return .black
+            return Color(uiColor: .white)
         } else {
-            return .white
+            return Color(uiColor: .black)
         }
     }
     
     private var textColor: Color {
         if selected {
-            return .white
+            return Color(uiColor: .black)
         } else {
-            return .black
+            return Color(uiColor: .white)
         }
     }
     
@@ -45,15 +45,16 @@ struct FilterButton: View {
         } label: {
             Text(label)
                 .foregroundColor(textColor)
-                .padding(.horizontal)
+                .padding(.horizontal, 32)
                 .padding(.vertical, 8)
                 .background(buttonColor)
                 .cornerRadius(100)
                 .overlay(
                     RoundedRectangle(cornerRadius: 100)
-                        .stroke(.black, lineWidth: 1)
+                        .stroke(.white, lineWidth: 1)
                 )
-                .padding()
+                .padding(.vertical, 12)
+                .padding(.horizontal, 2)
                 .buttonStyle(.bordered)
         
         }
