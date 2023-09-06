@@ -24,6 +24,7 @@
 		7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34245A2A9CDA7400E77B14 /* FilterManager.swift */; };
 		7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */; };
 		7C3424652AA0BA5700E77B14 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7C3424642AA0BA5700E77B14 /* .gitignore */; };
+		7C4973832AA7601A00AC1941 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4973822AA7601A00AC1941 /* NavBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		7C34245A2A9CDA7400E77B14 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7C3424642AA0BA5700E77B14 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7C4973822AA7601A00AC1941 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,9 +129,18 @@
 		7C3424632AA0AD2C00E77B14 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7C49737F2AA75FE500AC1941 /* NavBar */,
 				7C0F6B8A2A98F1E6004D0B72 /* FilterButton */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		7C49737F2AA75FE500AC1941 /* NavBar */ = {
+			isa = PBXGroup;
+			children = (
+				7C4973822AA7601A00AC1941 /* NavBar.swift */,
+			);
+			path = NavBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
+				7C4973832AA7601A00AC1941 /* NavBar.swift in Sources */,
 				7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
 				7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */,
