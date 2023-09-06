@@ -73,7 +73,6 @@ struct FilterScreen: View {
                 firestoreManager.populatePossibleTickets()
             }
         }
-        .navigationBarBackButtonHidden()
         .background(.black)
     }
 }

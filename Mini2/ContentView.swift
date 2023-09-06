@@ -51,13 +51,6 @@ struct ContentView: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack{
-                        ForEach(1..<10, id: \.self) { i in
-                            Text("oi")
-                                .frame(maxWidth: .infinity, maxHeight: 100)
-                                .background(.red)
-                                .padding(.vertical, 64)
-                                .foregroundColor(.red)
-                        }
                         Text(firestoreManager.currentTicket).font(.largeTitle)
                         
                         ForEach(firestoreManager.currentTicketTags, id: \.self) { item in

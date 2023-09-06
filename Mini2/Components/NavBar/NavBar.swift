@@ -26,12 +26,7 @@ struct NavBar: View {
             .frame(maxWidth: .infinity)
             .padding()
             .padding(.horizontal, 8)
-            .background(.black.opacity(0.75))
-            .background(.ultraThinMaterial)
-            .cornerRadius(14)
             .ignoresSafeArea()
-            
-            
             Spacer()
         }
     }
