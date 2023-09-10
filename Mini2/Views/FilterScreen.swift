@@ -46,7 +46,7 @@ struct FilterScreen: View {
                     .bold()
                 
                 WrappingHStack (0..<filtros1.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros1[i])
+                    FilterButton(label: filtros1[i], backgroundColor: true)
                 }
                 
                 Text("Relacionado a:")
@@ -55,7 +55,7 @@ struct FilterScreen: View {
                     .bold()
                 
                 WrappingHStack (0..<filtros2.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros2[i])
+                    FilterButton(label: filtros2[i], backgroundColor: true)
                 }
                 
                 Text("Com quem?")
@@ -64,7 +64,7 @@ struct FilterScreen: View {
                     .bold()
                 
                 WrappingHStack (0..<filtros3.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros3[i])
+                    FilterButton(label: filtros3[i], backgroundColor: true)
                 }
             }
             .padding(.bottom, 32)

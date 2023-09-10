@@ -12,6 +12,8 @@ struct FilterButton: View {
     
     var label: String = ""
     
+    var backgroundColor = true
+    
     @State var selected: Bool = false
     @EnvironmentObject var firestoreManager: FirestoreManager
     
@@ -20,6 +22,14 @@ struct FilterButton: View {
             return Color(uiColor: .white)
         } else {
             return Color(uiColor: .black)
+        }
+    }
+    
+    private var buttonColor2: Color {
+        if selected {
+            return Color(uiColor: .white)
+        } else {
+            return Color(uiColor: .white).opacity(0)
         }
     }
     
@@ -47,7 +57,7 @@ struct FilterButton: View {
                 .foregroundColor(textColor)
                 .padding(.horizontal, 32)
                 .padding(.vertical, 8)
-                .background(buttonColor)
+                .background(backgroundColor == true ? buttonColor : buttonColor2)
                 .cornerRadius(100)
                 .overlay(
                     RoundedRectangle(cornerRadius: 100)
