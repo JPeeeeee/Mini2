@@ -24,7 +24,13 @@
 		7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34245A2A9CDA7400E77B14 /* FilterManager.swift */; };
 		7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */; };
 		7C3424652AA0BA5700E77B14 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7C3424642AA0BA5700E77B14 /* .gitignore */; };
-		7C4973832AA7601A00AC1941 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4973822AA7601A00AC1941 /* NavBar.swift */; };
+		7CC408682AA8A49200C4F567 /* DailyCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408672AA8A49200C4F567 /* DailyCheckModel.swift */; };
+		7CC4086D2AA8A52E00C4F567 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */; };
+		7CC408712AA8A5D300C4F567 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408702AA8A5D300C4F567 /* HomeView.swift */; };
+		7CC408732AA8A92A00C4F567 /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408722AA8A92A00C4F567 /* DefaultsManager.swift */; };
+		7CC408752AA8BC7400C4F567 /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408742AA8BC7300C4F567 /* MemoryView.swift */; };
+		7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */; };
+		7CFD2ABB2AA9057100AE4562 /* Onboarding3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +46,13 @@
 		7C34245A2A9CDA7400E77B14 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7C3424642AA0BA5700E77B14 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		7C4973822AA7601A00AC1941 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		7CC408672AA8A49200C4F567 /* DailyCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCheckModel.swift; sourceTree = "<group>"; };
+		7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		7CC408702AA8A5D300C4F567 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7CC408722AA8A92A00C4F567 /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
+		7CC408742AA8BC7300C4F567 /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = "<group>"; };
+		7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
+		7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,12 +100,13 @@
 		7C2742562A964B46001ABC08 /* Mini2 */ = {
 			isa = PBXGroup;
 			children = (
+				7CC4086B2AA8A51000C4F567 /* Views */,
+				7CC4086A2AA8A4F900C4F567 /* Model */,
 				7C3424632AA0AD2C00E77B14 /* Components */,
 				7C3424592A9CDA6600E77B14 /* Managers */,
 				7C3424562A9CD76F00E77B14 /* Storage */,
 				7C2742572A964B46001ABC08 /* Mini2App.swift */,
 				7C2742592A964B46001ABC08 /* ContentView.swift */,
-				7C0F6B902A98F531004D0B72 /* FilterScreen.swift */,
 				7C27425B2A964B47001ABC08 /* Assets.xcassets */,
 				7C3424492A9CD52A00E77B14 /* GoogleService-Info.plist */,
 				7C27425D2A964B47001ABC08 /* Preview Content */,
@@ -122,6 +135,7 @@
 			children = (
 				7C34245A2A9CDA7400E77B14 /* FilterManager.swift */,
 				7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */,
+				7CC408722AA8A92A00C4F567 /* DefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -129,18 +143,30 @@
 		7C3424632AA0AD2C00E77B14 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7C49737F2AA75FE500AC1941 /* NavBar */,
 				7C0F6B8A2A98F1E6004D0B72 /* FilterButton */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		7C49737F2AA75FE500AC1941 /* NavBar */ = {
+		7CC4086A2AA8A4F900C4F567 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C4973822AA7601A00AC1941 /* NavBar.swift */,
+				7CC408672AA8A49200C4F567 /* DailyCheckModel.swift */,
 			);
-			path = NavBar;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7CC4086B2AA8A51000C4F567 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7C0F6B902A98F531004D0B72 /* FilterScreen.swift */,
+				7CC408702AA8A5D300C4F567 /* HomeView.swift */,
+				7CC408742AA8BC7300C4F567 /* MemoryView.swift */,
+				7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */,
+				7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */,
+				7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,12 +254,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
-				7C4973832AA7601A00AC1941 /* NavBar.swift in Sources */,
 				7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */,
+				7CC4086D2AA8A52E00C4F567 /* OnboardingView.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
+				7CC408712AA8A5D300C4F567 /* HomeView.swift in Sources */,
 				7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */,
+				7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */,
+				7CC408732AA8A92A00C4F567 /* DefaultsManager.swift in Sources */,
 				7C0F6B912A98F531004D0B72 /* FilterScreen.swift in Sources */,
+				7CFD2ABB2AA9057100AE4562 /* Onboarding3View.swift in Sources */,
 				7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */,
+				7CC408682AA8A49200C4F567 /* DailyCheckModel.swift in Sources */,
+				7CC408752AA8BC7400C4F567 /* MemoryView.swift in Sources */,
 				7C0F6B8C2A98F1F9004D0B72 /* FilterButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
