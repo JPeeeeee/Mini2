@@ -19,35 +19,42 @@ struct ContentView: View {
     @StateObject var firestoreManager = FirestoreManager()
     
     var body: some View {
-        
-        if UserDefaults.isFirstAccess() == false {
-            if !check() {
-                DailyTicketView()
-                    .environmentObject(firestoreManager)
-//                    .onAppear {
-//                        firestoreManager.selectedTags = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String> ?? Set<String>()
-//                    }
-            } else {
-                HomeView()
-                    .environmentObject(firestoreManager)
-//                    .onAppear {
-//                        if let data = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String>,
-//                           let category = try? JSONDecoder().decode([Tags].self, from: data) {
-//                             print(category.tags)
-//                        }
-//                    }
-//                    .onDisappear {
-//                        if let encoded = try? JSONEncoder().encode(firestoreManager.selectedTags) {
-//                            UserDefaults.standard.set(encoded, forKey: "selectedTags")
-//                        }
-//                    }
-            }
-        } else {
-            OnboardingView()
-                .environmentObject(firestoreManager)
-                .onAppear {
-                    UserDefaults.setFirstAccess(value: false)
+        Group {
+            if UserDefaults.isFirstAccess() == false {
+                if check() {
+                    DailyTicketView()
+                        .environmentObject(firestoreManager)
+                    //                    .onAppear {
+                    //                        firestoreManager.selectedTags = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String> ?? Set<String>()
+                    //                    }
+                } else {
+                    HomeView()
+                        .environmentObject(firestoreManager)
+                    
                 }
+            } else {
+                OnboardingView()
+                    .environmentObject(firestoreManager)
+                    .onAppear {
+                        UserDefaults.setFirstAccess(value: false)
+                    }
+            }
+        }
+        .onAppear {
+            let savedTags = UserDefaults.standard.array(forKey: "selectedTags")
+            let savedRerolled = UserDefaults.standard.bool(forKey: "pickedPrevious")
+
+            var arr = Set<String>()
+            
+            savedTags?.forEach({ item in
+                arr.insert(item as! String)
+            })
+            
+            firestoreManager.selectedTags = arr
+            
+            if savedRerolled == true {
+                firestoreManager.rerollEnum = .pickedPrevious
+            }
         }
     }
 }

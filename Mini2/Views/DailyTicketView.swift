@@ -17,8 +17,6 @@ struct DailyTicketView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     
-    @State var rerollEnum: reroll = .notRerolled
-    
     @State var previousTicket = ""
     @State var previousTags: [String] = []
     
@@ -84,26 +82,28 @@ struct DailyTicketView: View {
                             .bold()
                         
                         HStack {
-                            if rerollEnum != .pickedPrevious {
+                            if firestoreManager.rerollEnum != .pickedPrevious {
                                 Button {
-                                    if rerollEnum == .notRerolled {
+                                    if firestoreManager.rerollEnum == .notRerolled {
                                         previousTicket = firestoreManager.currentTicket
                                         previousTags = firestoreManager.currentTicketTags
                                         firestoreManager.pickTicket()
-                                        rerollEnum = .rerolled
-                                    } else if rerollEnum == .rerolled {
+                                        firestoreManager.rerollEnum = .rerolled
+                                    } else if firestoreManager.rerollEnum == .rerolled {
                                         firestoreManager.currentTicket = previousTicket
                                         firestoreManager.currentTicketTags = previousTags
-                                        rerollEnum = .pickedPrevious
+                                        firestoreManager.rerollEnum = .pickedPrevious
+                                        
+                                        UserDefaults.standard.set(true, forKey: "pickedPrevious")
                                     }
                                     
-                                    print(rerollEnum)
+                                    print(firestoreManager.rerollEnum)
                                 } label: {
                                     HStack {
-                                        if rerollEnum == .notRerolled {
+                                        if firestoreManager.rerollEnum == .notRerolled {
                                             Image(systemName: "shuffle")
                                         }
-                                        Text(rerollEnum == .notRerolled ? "New task!" : "Previous task")
+                                        Text(firestoreManager.rerollEnum == .notRerolled ? "New task!" : "Previous task")
                                             .bold()
                                     }
                                     .foregroundColor(Color("darkGray"))
@@ -149,7 +149,10 @@ struct DailyTicketView: View {
                 if firestoreManager.currentTicket == "" {
                     firestoreManager.pickTicket()
                 }
-        }
+                
+                UserDefaults.standard.set(false, forKey: "pickedPrevious")
+                firestoreManager.rerollEnum = .notRerolled
+            }
         }
     }
 }

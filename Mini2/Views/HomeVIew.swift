@@ -35,30 +35,95 @@ struct HomeView: View {
         }
     }
     
-    var body2: some View {
+    var pickerView: some View {
+        
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                HStack {
+                    Rectangle()
+                        .fill(Color("white"))
+                        .frame(maxWidth: geo.size.width / 2)
+                        .cornerRadius(5)
+                }
+                .offset(x: selected == 2 ? geo.size.width / 2 : 0)
+                
+                HStack {
+                    Button {
+                        withAnimation {
+                            selected = 1
+                        }
+                    } label: {
+                        Text("Task")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(selected == 1 ? Color("darkGray") : Color("lightGray"))
+                    }
+                    
+                    Button {
+                        withAnimation {
+                            selected = 2
+                        }
+                    } label: {
+                        Text("Memories")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(selected == 2 ? Color("darkGray") : Color("lightGray"))
+                    }
+                }
+                .padding(.vertical)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 60)
+        .background(Color("darkGray"))
+        .cornerRadius(5)
+    }
+    
+    var body: some View {
         NavigationStack {
             VStack {
                 ScrollView {
-                    Picker("AA", selection: getBinding()) {
-                        Text("Task").tag(1)
-                        Text("Memory").tag(2)
+                    Group {
+                        HStack {
+                            Text("Collec")
+                                .font(.custom("hanoble", size: 32))
+                                .foregroundColor(Color("white"))
+                            
+                            Spacer()
+                            
+                            NavigationLink {
+                                FilterScreen()
+                            } label: {
+                                Image(systemName: "slider.horizontal.3")
+                                    .foregroundColor(Color("white"))
+                                    .bold()
+                            }
+                        }
+                        pickerView
                     }
-                    .pickerStyle(.segmented)
-                    
+                    .padding()
                     
                     TabView(selection: $selected) {
-                        Rectangle().fill(.red).tag(1)
+                        TaskView().tag(1)
+                            .environmentObject(firestoreManager)
                         
-                        Rectangle().fill(.blue).tag(2)
+                        MemoryView().tag(2)
+                            .environmentObject(firestoreManager)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .frame(minHeight: 200)
                 }
+                .background(.black)
             }
+        }
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            // apagar este onappear no final!!!!
+            
+            UserDefaults.standard.set(false, forKey: "pickedPrevious")
         }
     }
     
-    var body: some View {
+    var body2: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack{
@@ -105,6 +170,8 @@ struct HomeView: View {
                 }
                 .padding(.top, height + 16)
             }
+            
+            
             .frame(maxWidth: .infinity)
             .background(.black)
         }

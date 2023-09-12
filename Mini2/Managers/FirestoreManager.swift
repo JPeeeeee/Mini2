@@ -19,6 +19,8 @@ class FirestoreManager: ObservableObject {
     @Published var currentTicket: String = ""
     @Published var currentTicketTags: [String] = []
     
+    @Published var rerollEnum: reroll = .notRerolled
+    
     func insert(filter: String) {
         possibleTickets = []
         self.selectedTags.insert(filter)
