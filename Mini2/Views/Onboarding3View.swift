@@ -10,7 +10,7 @@ import WrappingHStack
 
 struct Onboarding3View: View {
     
-    @EnvironmentObject var firestoreMager: FirestoreManager
+    @EnvironmentObject var firestoreManager: FirestoreManager
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -40,8 +40,6 @@ struct Onboarding3View: View {
     
     var body: some View {
         ZStack {
-            
-            
             ScrollView (showsIndicators: false){
                 VStack (alignment: .leading){
                     HStack {
@@ -110,8 +108,8 @@ struct Onboarding3View: View {
             }
             .padding(.horizontal)
             .background(Color("purple"))
-            .onDisappear {
-                firestoreMager.populatePossibleTickets()
+            .onAppear {
+                firestoreManager.currentTicket = "Take a picture of something that makes you feel good about yourself and post it here!"
             }
             .navigationBarBackButtonHidden()
             
@@ -132,7 +130,7 @@ struct Onboarding3View: View {
                     Spacer()
                     
                     NavigationLink {
-                        HomeView()
+                        DailyTicketView()
                     } label: {
                         Text("Start!")
                             .font(.callout)

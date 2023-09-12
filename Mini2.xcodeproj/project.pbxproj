@@ -29,6 +29,7 @@
 		7CC408712AA8A5D300C4F567 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408702AA8A5D300C4F567 /* HomeView.swift */; };
 		7CC408732AA8A92A00C4F567 /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408722AA8A92A00C4F567 /* DefaultsManager.swift */; };
 		7CC408752AA8BC7400C4F567 /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC408742AA8BC7300C4F567 /* MemoryView.swift */; };
+		7CF158EF2AAF552600C52C21 /* DailyTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */; };
 		7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */; };
 		7CFD2ABB2AA9057100AE4562 /* Onboarding3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		7CC408702AA8A5D300C4F567 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7CC408722AA8A92A00C4F567 /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		7CC408742AA8BC7300C4F567 /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = "<group>"; };
+		7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTicketView.swift; sourceTree = "<group>"; };
 		7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
 		7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +163,7 @@
 			children = (
 				7C0F6B902A98F531004D0B72 /* FilterScreen.swift */,
 				7CC408702AA8A5D300C4F567 /* HomeView.swift */,
+				7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */,
 				7CC408742AA8BC7300C4F567 /* MemoryView.swift */,
 				7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */,
 				7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */,
@@ -258,6 +261,7 @@
 				7CC4086D2AA8A52E00C4F567 /* OnboardingView.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
 				7CC408712AA8A5D300C4F567 /* HomeView.swift in Sources */,
+				7CF158EF2AAF552600C52C21 /* DailyTicketView.swift in Sources */,
 				7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */,
 				7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */,
 				7CC408732AA8A92A00C4F567 /* DefaultsManager.swift in Sources */,

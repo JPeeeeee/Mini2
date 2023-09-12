@@ -71,6 +71,8 @@ struct FilterScreen: View {
             .padding()
             .onDisappear {
                 firestoreManager.populatePossibleTickets()
+                    UserDefaults.standard.set(firestoreManager.selectedTags, forKey: "selectedTags")
+                
             }
         }
         .background(.black)

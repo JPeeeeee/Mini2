@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+//struct Tags: Codable {
+//    let tags: Set<String>
+//    let id = UUID()
+//}
+
 struct ContentView: View {
     
     @State var text: String = "DEBUG BASE"
@@ -14,9 +19,29 @@ struct ContentView: View {
     @StateObject var firestoreManager = FirestoreManager()
     
     var body: some View {
-        if UserDefaults.isFirstAccess() == true {
-            HomeView()
-                .environmentObject(firestoreManager)
+        
+        if UserDefaults.isFirstAccess() == false {
+            if !check() {
+                DailyTicketView()
+                    .environmentObject(firestoreManager)
+//                    .onAppear {
+//                        firestoreManager.selectedTags = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String> ?? Set<String>()
+//                    }
+            } else {
+                HomeView()
+                    .environmentObject(firestoreManager)
+//                    .onAppear {
+//                        if let data = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String>,
+//                           let category = try? JSONDecoder().decode([Tags].self, from: data) {
+//                             print(category.tags)
+//                        }
+//                    }
+//                    .onDisappear {
+//                        if let encoded = try? JSONEncoder().encode(firestoreManager.selectedTags) {
+//                            UserDefaults.standard.set(encoded, forKey: "selectedTags")
+//                        }
+//                    }
+            }
         } else {
             OnboardingView()
                 .environmentObject(firestoreManager)

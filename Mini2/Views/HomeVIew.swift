@@ -35,7 +35,7 @@ struct HomeView: View {
         }
     }
     
-    var algumaCoisa: some View {
+    var body2: some View {
         NavigationStack {
             VStack {
                 ScrollView {
@@ -62,14 +62,14 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack{
-                    
-                    
-                    
-                    Text(firestoreManager.currentTicket).font(.largeTitle)
+                    Text(firestoreManager.currentTicket)
+                        .font(.largeTitle)
+                        .foregroundColor(Color("white"))
                     
                     ForEach(firestoreManager.currentTicketTags, id: \.self) { item in
                         Text(item)
                             .font(.largeTitle)
+                            .foregroundColor(Color("white"))
                     }
                     
                     
