@@ -100,7 +100,7 @@ struct HomeView: View {
                             .bold()
                     }
                 }
-                
+                .padding(.horizontal)
             }
             .padding(.vertical)
             .background(.black)
