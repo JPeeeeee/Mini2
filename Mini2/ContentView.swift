@@ -7,14 +7,7 @@
 
 import SwiftUI
 
-//struct Tags: Codable {
-//    let tags: Set<String>
-//    let id = UUID()
-//}
-
 struct ContentView: View {
-    
-    @State var text: String = "DEBUG BASE"
     
     @StateObject var firestoreManager = FirestoreManager()
     
@@ -29,7 +22,6 @@ struct ContentView: View {
                 } else {
                     HomeView()
                         .environmentObject(firestoreManager)
-                    
                 }
             } else {
                 OnboardingView()

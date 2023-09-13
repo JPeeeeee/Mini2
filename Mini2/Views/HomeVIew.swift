@@ -15,6 +15,8 @@ struct HomeView: View {
     
     @State var selected = 1
     
+    @State var navHeight = 0.0
+    
     func getBinding() -> Binding<Int> {
         return Binding(get: { return selected }) { v in
             withAnimation {
@@ -60,51 +62,60 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
+            .onAppear {
+                height = geo.size.height
+            }
         }
         .frame(maxWidth: .infinity, minHeight: 60)
         .background(Color("darkGray"))
         .cornerRadius(5)
     }
     
+    var navBar: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Button {
+                        if selected == 1 {
+                            
+                        } else {
+                            withAnimation {
+                                selected = 1
+                            }
+                        }
+                    } label: {
+                        Text("Collec")
+                            .font(.custom("hanoble", size: 32))
+                            .foregroundColor(Color("white"))
+                    }
+                    
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        FilterScreen()
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(Color("white"))
+                            .bold()
+                    }
+                }
+                
+            }
+            .padding(.vertical)
+            .background(.black)
+            Spacer()
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
                 GeometryReader { geo in
-                    ScrollView {
-                        Group {
-                            HStack {
-                                Text("Collec")
-                                    .font(.custom("hanoble", size: 32))
-                                    .foregroundColor(Color("white"))
-                                
-                                Spacer()
-                                
-                                NavigationLink {
-                                    FilterScreen()
-                                } label: {
-                                    Image(systemName: "slider.horizontal.3")
-                                        .foregroundColor(Color("white"))
-                                        .bold()
-                                }
-                            }
-                            pickerView
-                            
-                            Button(action: {
-                                Task {
-                                    try await firestoreManager.uploadFilter(filters: ["With people", "Time perception & Mindfullness"], ticketsArr: [
-                                        
-                                        "Write about everything you were grateful for today. Practice gratitude and think about how it makes you feel",
-                                        "Take a look at the sky during the day, how the colors changed, if it was sunny, if there were stars, how the moon was. Think about how the day goes by and on everything you've done.",
-                                        "Set an alarm clock every 30 minutes. Did the time between them pass quickly or slowly? Did you remember them? How many times did it ring while you were doing something boring? And fun?"
-                                    ])
-                                }
-                            },
-                                   label: {
-                                Text("Send data")
-                            })
+                    ScrollView (showsIndicators: false) {
+                        pickerView
                             .padding()
-                        }
-                        .padding()
+                            .padding(.top, 60)
                         
                         TabView(selection: $selected) {
                             TaskView().tag(1)
@@ -118,59 +129,19 @@ struct HomeView: View {
                     }
                     .background(.black)
                 }
+                navBar
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
-            // apagar este onappear no final!!!!
-            
+            // apagar este userdefaults no final!!!!
             UserDefaults.standard.set(false, forKey: "pickedPrevious")
+            
+            
             UserDefaults.standard.set(firestoreManager.currentTicket, forKey: "currentTicket")
             UserDefaults.standard.set(firestoreManager.currentTicketTags, forKey: "currentTicketTags")
-        }
-    }
-    
-    var body2: some View {
-        NavigationStack {
-            ScrollView(showsIndicators: false) {
-                VStack{
-                    Text(firestoreManager.currentTicket)
-                        .font(.largeTitle)
-                        .foregroundColor(Color("white"))
-                    
-                    ForEach(firestoreManager.currentTicketTags, id: \.self) { item in
-                        Text(item)
-                            .font(.largeTitle)
-                            .foregroundColor(Color("white"))
-                    }
-                    
-                    
-                    NavigationLink {
-                        FilterScreen()
-                    } label: {
-                        Text("Filter Screen")
-                    }
-
-                    
-                    Button(action: {
-                        if !firestoreManager.selectedTags.isEmpty {
-                            firestoreManager.pickTicket()
-                            print(firestoreManager.currentTicket)
-                        } else {
-                            print("n tem nada marcado cara")
-                        }
-                    },
-                           label: {
-                        Text("print data")
-                    })
-                    .padding()
-                }
-                .padding(.top, height + 16)
-            }
             
-            
-            .frame(maxWidth: .infinity)
-            .background(.black)
+            firestoreManager.populatePossibleTickets()
         }
     }
 }

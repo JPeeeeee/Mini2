@@ -16,6 +16,8 @@ struct TicketCard: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     
+    @Binding var completed: Bool
+    
     private var cardSet: CardSet {
         
         var tag = ""
@@ -23,7 +25,7 @@ struct TicketCard: View {
         if !firestoreManager.currentTicketTags.isEmpty {
             tag = firestoreManager.currentTicketTags[0]
         } else {
-            tag = "Writing"
+            tag = "Time perception & Mindfulness"
         }
         
         let blueTags = [
@@ -45,12 +47,13 @@ struct TicketCard: View {
         
         let yellowTags = [
             "Self-Care",
-            "With partner"
+            "Romantic"
         ]
         
         let orangeTags = [
             "Time perception & Mindfulness",
-            "Physical activity"
+            "Physical activity",
+            "Outside"
         ]
         
         let greenTags = [
@@ -73,7 +76,7 @@ struct TicketCard: View {
             return CardSet(image: tag, color: Color("green"))
         }
         
-        return CardSet(image: "", color: .white)
+        return CardSet(image: tag, color: Color("yellow"))
     }
     
     var body: some View {
@@ -96,17 +99,16 @@ struct TicketCard: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity, minHeight: 200)
                 .padding()
                 .background(cardSet.color)
                 .cornerRadius(5)
                 
                 VStack {
-                    Spacer()
                     Text(firestoreManager.currentTicket)
-                    Spacer()
+                        .padding(.vertical)
                     Button {
-                        print("Completar tarefa")
+                        completed.toggle()
                     } label: {
                         Text("Complete task")
                             .padding(.horizontal, 32)
@@ -117,11 +119,10 @@ struct TicketCard: View {
                             .bold()
                     }
                 }
-                .frame(maxWidth: .infinity,  maxHeight: .infinity)
+                .frame(maxWidth: .infinity)
                 .padding()
-                .background(.white)
+                .background(Color("white"))
             }
-            .frame(maxWidth: .infinity, maxHeight: 500)
             .background(Color("white"))
             .cornerRadius(5)
         }
@@ -130,7 +131,7 @@ struct TicketCard: View {
 
 struct TicketCard_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        TicketCardView(completed: .constant(false))
             .environmentObject(FirestoreManager())
     }
 }

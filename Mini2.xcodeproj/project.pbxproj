@@ -35,6 +35,8 @@
 		7CF158EF2AAF552600C52C21 /* DailyTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */; };
 		7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */; };
 		7CFD2ABB2AA9057100AE4562 /* Onboarding3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */; };
+		7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41172AB1E6D700798B4D /* TicketCardView.swift */; };
+		7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTicketView.swift; sourceTree = "<group>"; };
 		7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
 		7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3View.swift; sourceTree = "<group>"; };
+		7CFD41172AB1E6D700798B4D /* TicketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCardView.swift; sourceTree = "<group>"; };
+		7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,8 @@
 				7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */,
 				7CC408742AA8BC7300C4F567 /* MemoryView.swift */,
 				7C3311B92AB09848001A8088 /* TaskView.swift */,
+				7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */,
+				7CFD41172AB1E6D700798B4D /* TicketCardView.swift */,
 				7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */,
 				7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */,
 				7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */,
@@ -261,7 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C3311BF2AB0BC55001A8088 /* TicketCard.swift in Sources */,
+				7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */,
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
+				7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */,
 				7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */,
 				7CC4086D2AA8A52E00C4F567 /* OnboardingView.swift in Sources */,
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,

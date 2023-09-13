@@ -17,8 +17,6 @@ struct DailyTicketView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     
-    @State var previousTicket = ""
-    @State var previousTags: [String] = []
     
     var body: some View {
         NavigationStack {
@@ -85,19 +83,19 @@ struct DailyTicketView: View {
                             if firestoreManager.rerollEnum != .pickedPrevious {
                                 Button {
                                     if firestoreManager.rerollEnum == .notRerolled {
-                                        previousTicket = firestoreManager.currentTicket
-                                        previousTags = firestoreManager.currentTicketTags
+                                        firestoreManager.previousTicket = firestoreManager.currentTicket
+                                        firestoreManager.previousTicketTags = firestoreManager.currentTicketTags
                                         firestoreManager.pickTicket()
                                         firestoreManager.rerollEnum = .rerolled
                                     } else if firestoreManager.rerollEnum == .rerolled {
-                                        firestoreManager.currentTicket = previousTicket
-                                        firestoreManager.currentTicketTags = previousTags
+                                        firestoreManager.currentTicket = firestoreManager.previousTicket
+                                        firestoreManager.currentTicketTags = firestoreManager.previousTicketTags
                                         firestoreManager.rerollEnum = .pickedPrevious
                                         
                                         UserDefaults.standard.set(true, forKey: "pickedPrevious")
                                     }
-                                    
-                                    print(firestoreManager.rerollEnum)
+                                    UserDefaults.standard.set(firestoreManager.currentTicket, forKey: "currentTicket")
+                                    UserDefaults.standard.set(firestoreManager.currentTicketTags, forKey: "currentTicketTags")
                                 } label: {
                                     HStack {
                                         if firestoreManager.rerollEnum == .notRerolled {
@@ -146,6 +144,8 @@ struct DailyTicketView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black)
             .onAppear {
+                firestoreManager.populatePossibleTickets()
+                
                 if firestoreManager.currentTicket == "" {
                     firestoreManager.pickTicket()
                 }

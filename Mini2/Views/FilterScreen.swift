@@ -33,7 +33,7 @@ struct FilterScreen: View {
     
     var filtros3: [String] = [
         "With people",
-        "With partner",
+        "Romantic",
         "Pets",
     ]
     
