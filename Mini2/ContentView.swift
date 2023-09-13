@@ -18,9 +18,11 @@ struct ContentView: View {
     
     @StateObject var firestoreManager = FirestoreManager()
     
+    @State var onBoarding = false
+    
     var body: some View {
         Group {
-            if UserDefaults.isFirstAccess() == false {
+            if onBoarding == true {
                 if check() {
                     DailyTicketView()
                         .environmentObject(firestoreManager)
@@ -32,9 +34,6 @@ struct ContentView: View {
             } else {
                 OnboardingView()
                     .environmentObject(firestoreManager)
-                    .onAppear {
-                        UserDefaults.setFirstAccess(value: false)
-                    }
             }
         }
         .onAppear {
@@ -43,6 +42,9 @@ struct ContentView: View {
             
             let savedCurrentTicket = UserDefaults.standard.string(forKey: "currentTicket")
             let savedCurrentTicketTags = UserDefaults.standard.array(forKey: "currentTicketTags") as? [String]
+            
+            let savedOnBoarding = UserDefaults.standard.bool(forKey: "onBoarding")
+            onBoarding = savedOnBoarding
 
             var arr = Set<String>()
             

@@ -91,9 +91,11 @@ struct HomeView: View {
                             
                             Button(action: {
                                 Task {
-                                    try await firestoreManager.uploadFilter(filters: ["Outside", "Time perception & Mindfullness"], ticketsArr: [
+                                    try await firestoreManager.uploadFilter(filters: ["With people", "Time perception & Mindfullness"], ticketsArr: [
                                         
-                                        "Go outside and think about everything you are seeing (trees, streets, animals, sky...). Make it a moment of self-connection, relaxation, and connection to the present.",
+                                        "Write about everything you were grateful for today. Practice gratitude and think about how it makes you feel",
+                                        "Take a look at the sky during the day, how the colors changed, if it was sunny, if there were stars, how the moon was. Think about how the day goes by and on everything you've done.",
+                                        "Set an alarm clock every 30 minutes. Did the time between them pass quickly or slowly? Did you remember them? How many times did it ring while you were doing something boring? And fun?"
                                     ])
                                 }
                             },

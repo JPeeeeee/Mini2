@@ -131,6 +131,9 @@ struct Onboarding3View: View {
                     
                     NavigationLink {
                         DailyTicketView()
+                            .onAppear {
+                                UserDefaults.standard.set(true, forKey: "onBoarding")
+                            }
                     } label: {
                         Text("Start!")
                             .font(.callout)
