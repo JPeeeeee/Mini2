@@ -11,69 +11,111 @@ import WrappingHStack
 struct FilterScreen: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var filtros1: [String] = [
-        "Criatividade",
-        "Fotografia",
-        "Música",
-        "Escrita",
-        "Percepção do tempo e mindfulness"
+        "Creativity",
+        "Photography",
+        "Music",
+        "Writing",
+        "Time perception & Mindfulness"
     ]
     
     var filtros2: [String] = [
-        "Fora de casa",
-        "Produtividade",
-        "Atividades físicas",
-        "Autocuidado",
-        "Trabalho",
-        "Comida",
-        "Sem tech",
+        "Outside",
+        "Productivity",
+        "Physical activity",
+        "Self-Care",
+        "Work",
+        "Food",
+        "No tech",
     ]
     
     var filtros3: [String] = [
-        "Com pessoas",
-        "Com companheiro(a)",
+        "With people",
+        "With partner",
         "Pets",
     ]
     
+    @State var offSet = 0.0
+    
     var body: some View {
         
-        ScrollView {
-            VStack (alignment: .leading) {
-                Text("Incentivo a:")
-                    .padding()
-                    .foregroundColor(.white)
-                    .bold()
+        ZStack {
+            ScrollView {
                 
-                WrappingHStack (0..<filtros1.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros1[i], backgroundColor: true)
+                VStack (alignment: .leading) {
+                    Text("About...")
+                        .padding()
+                        .foregroundColor(.white)
+                        .bold()
+                    
+                    WrappingHStack (0..<filtros1.count, id: \.self, alignment: .leading) { i in
+                        FilterButton(label: filtros1[i], backgroundColor: true)
+                    }
+                    
+                    Text("Related to...")
+                        .padding()
+                        .foregroundColor(.white)
+                        .bold()
+                    
+                    WrappingHStack (0..<filtros2.count, id: \.self, alignment: .leading) { i in
+                        FilterButton(label: filtros2[i], backgroundColor: true)
+                    }
+                    
+                    Text("With...")
+                        .padding()
+                        .foregroundColor(.white)
+                        .bold()
+                    
+                    WrappingHStack (0..<filtros3.count, id: \.self, alignment: .leading) { i in
+                        FilterButton(label: filtros3[i], backgroundColor: true)
+                    }
                 }
-                
-                Text("Relacionado a:")
-                    .padding()
-                    .foregroundColor(.white)
-                    .bold()
-                
-                WrappingHStack (0..<filtros2.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros2[i], backgroundColor: true)
-                }
-                
-                Text("Com quem?")
-                    .padding()
-                    .foregroundColor(.white)
-                    .bold()
-                
-                WrappingHStack (0..<filtros3.count, id: \.self, alignment: .leading) { i in
-                    FilterButton(label: filtros3[i], backgroundColor: true)
+                .padding(.bottom, 32)
+                .padding()
+                .offset(y: offSet)
+                .onDisappear {
+                    
+                    firestoreManager.populatePossibleTickets()
+                    
+                    if !firestoreManager.selectedTags.isEmpty {
+                        let arr = [String](firestoreManager.selectedTags)
+                        UserDefaults.standard.set(arr, forKey: "selectedTags")
+                    }
                 }
             }
-            .padding(.bottom, 32)
-            .padding()
-            .onDisappear {
-                firestoreManager.populatePossibleTickets()
+            .background(.black)
+            .navigationBarBackButtonHidden()
+            
+            
+            VStack {
+                
+                HStack {
+                    GeometryReader { geo in
+                        Button {
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image(systemName: "arrow.left")
+                                .foregroundColor(Color("white"))
+                                .bold()
+                                .font(.title2)
+                        }
+                        .onAppear {
+                            offSet = geo.size.height
+                        }
+                    }
+                    
+                    Spacer()
+                }
+                .frame(maxHeight: 30)
+                .padding()
+                .background(.black)
+                
+                
+                Spacer()
             }
         }
-        .background(.black)
     }
 }
 

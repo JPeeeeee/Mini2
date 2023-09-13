@@ -50,8 +50,6 @@ struct FilterButton: View {
                 selected = true
                 firestoreManager.insert(filter: label)
             }
-            
-            print(firestoreManager.selectedTags)
         } label: {
             Text(label)
                 .foregroundColor(textColor)
