@@ -14,26 +14,26 @@ struct FilterScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var filtros1: [String] = [
-        "Criatividade",
-        "Fotografia",
-        "Música",
-        "Escrita",
-        "Percepção do tempo e mindfulness"
+        "Creativity",
+        "Photography",
+        "Music",
+        "Writing",
+        "Time perception & Mindfulness"
     ]
     
     var filtros2: [String] = [
-        "Fora de casa",
-        "Produtividade",
-        "Atividades físicas",
-        "Autocuidado",
-        "Trabalho",
-        "Comida",
-        "Sem tech",
+        "Outside",
+        "Productivity",
+        "Physical activity",
+        "Self-Care",
+        "Work",
+        "Food",
+        "No tech",
     ]
     
     var filtros3: [String] = [
-        "Com pessoas",
-        "Com companheiro(a)",
+        "With people",
+        "With partner",
         "Pets",
     ]
     
@@ -45,7 +45,7 @@ struct FilterScreen: View {
             ScrollView {
                 
                 VStack (alignment: .leading) {
-                    Text("Incentivo a:")
+                    Text("About...")
                         .padding()
                         .foregroundColor(.white)
                         .bold()
@@ -54,7 +54,7 @@ struct FilterScreen: View {
                         FilterButton(label: filtros1[i], backgroundColor: true)
                     }
                     
-                    Text("Relacionado a:")
+                    Text("Related to...")
                         .padding()
                         .foregroundColor(.white)
                         .bold()
@@ -63,7 +63,7 @@ struct FilterScreen: View {
                         FilterButton(label: filtros2[i], backgroundColor: true)
                     }
                     
-                    Text("Com quem?")
+                    Text("With...")
                         .padding()
                         .foregroundColor(.white)
                         .bold()
@@ -81,9 +81,6 @@ struct FilterScreen: View {
                     
                     if !firestoreManager.selectedTags.isEmpty {
                         let arr = [String](firestoreManager.selectedTags)
-                        
-                        print("[FilterScreen] onDisappear: \(arr)")
-                        
                         UserDefaults.standard.set(arr, forKey: "selectedTags")
                     }
                 }

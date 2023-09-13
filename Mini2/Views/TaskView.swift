@@ -59,7 +59,9 @@ struct TaskView: View {
                 }
             }
             .frame(minHeight: 40)
-            Spacer()
+            .padding(.bottom)
+            
+            TicketCard()
         }
         .padding()
     }

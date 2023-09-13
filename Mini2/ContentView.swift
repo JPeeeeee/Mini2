@@ -24,9 +24,6 @@ struct ContentView: View {
                 if check() {
                     DailyTicketView()
                         .environmentObject(firestoreManager)
-                    //                    .onAppear {
-                    //                        firestoreManager.selectedTags = UserDefaults.standard.object(forKey: "selectedTags") as? Set<String> ?? Set<String>()
-                    //                    }
                 } else {
                     HomeView()
                         .environmentObject(firestoreManager)
@@ -43,6 +40,9 @@ struct ContentView: View {
         .onAppear {
             let savedTags = UserDefaults.standard.array(forKey: "selectedTags")
             let savedRerolled = UserDefaults.standard.bool(forKey: "pickedPrevious")
+            
+            let savedCurrentTicket = UserDefaults.standard.string(forKey: "currentTicket")
+            let savedCurrentTicketTags = UserDefaults.standard.array(forKey: "currentTicketTags") as? [String]
 
             var arr = Set<String>()
             
@@ -50,7 +50,16 @@ struct ContentView: View {
                 arr.insert(item as! String)
             })
             
+            print(check())
+            
             firestoreManager.selectedTags = arr
+            firestoreManager.currentTicket = savedCurrentTicket ?? "No more activities today!"
+            
+            if savedCurrentTicket == "" {
+                firestoreManager.currentTicket = "No more activities today!"
+            }
+            
+            firestoreManager.currentTicketTags = savedCurrentTicketTags ?? []
             
             if savedRerolled == true {
                 firestoreManager.rerollEnum = .pickedPrevious

@@ -25,7 +25,7 @@ struct Onboarding3View: View {
     var filtros2: [String] = [
         "Outside",
         "Productivity",
-        "Exercise",
+        "Physical activity",
         "Self-Care",
         "Work",
         "Food",
