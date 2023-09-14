@@ -83,7 +83,7 @@ struct TicketCardView: View {
                         .scaledToFit()
                 }
             }
-            .frame(maxHeight: 150)
+            .frame(height: 100)
             .background(Color("darkGray"))
             .cornerRadius(5)
         }
