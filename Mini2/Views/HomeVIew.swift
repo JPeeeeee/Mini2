@@ -64,6 +64,7 @@ struct HomeView: View {
             }
             .onAppear {
                 height = geo.size.height
+                print("pickerHeight: \(height)")
             }
         }
         .frame(maxWidth: .infinity, minHeight: 60)
@@ -104,6 +105,15 @@ struct HomeView: View {
             }
             .padding(.vertical)
             .background(.black)
+            .overlay {
+                GeometryReader { navReader in
+                    Rectangle().fill(.clear)
+                        .onAppear {
+                            navHeight = navReader.size.height
+                            print("navHeight: \(navHeight)")
+                        }
+                }
+            }
             Spacer()
         }
     }
@@ -117,19 +127,25 @@ struct HomeView: View {
                             .padding()
                             .padding(.top, 60)
                         
-                        TabView(selection: $selected) {
-                            TaskView().tag(1)
-                                .environmentObject(firestoreManager)
-                            
-                            MemoryView().tag(2)
-                                .environmentObject(firestoreManager)
+                        Group {
+                            if selected == 1 {
+                                TaskView().tag(1)
+                                    .transition(.move(edge: .leading))
+                                    .environmentObject(firestoreManager)
+                                
+                            } else if selected == 2 {
+                                MemoryView().tag(2)
+                                    .transition(.move(edge: .trailing))
+                                    .environmentObject(firestoreManager)
+                            }
                         }
-                        .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(minHeight: geo.size.height)
+                        .frame(maxHeight: geo.size.height - navHeight - height - 60)
                     }
                     .background(.black)
                 }
+                
                 navBar
+                
             }
         }
         .navigationBarBackButtonHidden()

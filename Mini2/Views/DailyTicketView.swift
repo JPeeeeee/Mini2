@@ -78,6 +78,7 @@ struct DailyTicketView: View {
                             .font(.callout)
                             .padding(.vertical)
                             .bold()
+                            .foregroundColor(Color("darkGray"))
                         
                         HStack {
                             if firestoreManager.rerollEnum != .pickedPrevious {

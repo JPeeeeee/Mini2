@@ -79,59 +79,64 @@ struct TicketCard: View {
         return CardSet(image: tag, color: Color("yellow"))
     }
     
+    @State var width: CGFloat = UIScreen.main.bounds.width
+    
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                ZStack {
+        VStack {
+            ZStack(alignment: .topTrailing) {
+                HStack {
                     Image(cardSet.image)
                         .resizable()
                         .scaledToFit()
-                        .offset(x: -geo.size.width / 4)
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            Text(cardSet.image)
-                                .font(.callout)
-                                .foregroundColor(Color("white"))
-                            
-                            Spacer()
-                        }
-                    }
+                        .offset(x: -width / 10)
+                    
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, minHeight: 200)
-                .padding()
-                .background(cardSet.color)
-                .cornerRadius(5)
                 
-                VStack {
-                    Text(firestoreManager.currentTicket)
-                        .padding(.vertical)
-                    Button {
-                        completed.toggle()
-                    } label: {
-                        Text("Complete task")
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 4)
-                            .background(.black)
+                HStack {
+                    
+                    VStack {
+                        Text(cardSet.image)
+                            .font(.callout)
                             .foregroundColor(Color("white"))
-                            .cornerRadius(10)
-                            .bold()
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color("white"))
             }
-            .background(Color("white"))
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(cardSet.color)
             .cornerRadius(5)
+            
+            VStack {
+                Text(firestoreManager.currentTicket)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom)
+                    .foregroundColor(Color("darkGray"))
+                Button {
+                    completed.toggle()
+                } label: {
+                    Text("Complete task")
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 4)
+                        .background(.black)
+                        .foregroundColor(Color("white"))
+                        .cornerRadius(10)
+                        .bold()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color("white"))
         }
+        .background(Color("white"))
+        .cornerRadius(5)
     }
 }
 
 struct TicketCard_Previews: PreviewProvider {
     static var previews: some View {
-        TicketCardView(completed: .constant(false))
+//        TicketCard(completed: .constant(false))
+        HomeView()
             .environmentObject(FirestoreManager())
     }
 }

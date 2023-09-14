@@ -66,21 +66,21 @@ struct TicketCardView: View {
             TicketCard(completed: $completed)
             
             ZStack {
-                
+
                 Image("Stars")
                     .resizable()
                     .scaledToFit()
-                
+
                 HStack {
-                    
+
                     Spacer()
-                    
+
                     Text("Finish your daily task to \n see your memory here!")
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color("lightGray"))
-                    
+
                     Spacer()
-                    
+
                     Image("Polaroids")
                         .resizable()
                         .scaledToFit()
@@ -90,7 +90,7 @@ struct TicketCardView: View {
             .background(Color("darkGray"))
             .cornerRadius(5)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
     }
 }
@@ -98,6 +98,7 @@ struct TicketCardView: View {
 struct TicketCardView_Previews: PreviewProvider {
     static var previews: some View {
         TicketCardView(completed: .constant(false))
+//        HomeView()
             .environmentObject(FirestoreManager())
     }
 }
