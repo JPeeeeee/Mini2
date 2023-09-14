@@ -113,8 +113,8 @@ struct TicketCard: View {
                     .foregroundColor(Color("darkGray"))
                 Button {
                   // show modal
-                    firestoreManager.completedTask = true
-                    //showingSheet = true
+                    //firestoreManager.completedTask = true
+                    showingSheet = true
                   print("show modal")
                 } label: {
                     Text("Complete task")

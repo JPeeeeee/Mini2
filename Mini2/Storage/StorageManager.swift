@@ -52,11 +52,17 @@ final class StorageManager {
         
         let path = "\(UUID().uuidString).heic"
         
+        print("DEBUG2 1")
+        
         let returnedMetaData = try await userReference(userId: userId).child(path).putDataAsync(data, metadata: meta)
+        
+        print("DEBUG2 2")
         
         guard let returnedPath = returnedMetaData.path, let returnedName = returnedMetaData.name else {
                 throw URLError(.badServerResponse)
         }
+        
+        print("DEBUG2 3")
         
         return (returnedPath, returnedName)
     }

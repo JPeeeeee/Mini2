@@ -60,7 +60,6 @@ final class ImageViewPickerModel: ObservableObject {
     
     func saveProfileImage(image: UIImage, text: String){
         guard var user else { return }
-
         Task {
             let (path, name) = try await StorageManager.shared.saveImage(image: image, userId: user.userId)
             print("DEBUG2 SUCC")

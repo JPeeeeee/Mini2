@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CompletedTaskView: View {
     @State private var showingSheet = false
+    @StateObject private var viewModel = MemoryViewModel()
     
     var body: some View {
         VStack {
@@ -48,38 +49,59 @@ struct CompletedTaskView: View {
                     .font(.title2)
             }
             
-            ZStack {
-                Image("FinishedStars")
-                    .resizable()
-                    .scaledToFit()
-                
-                VStack {
-                    Text("You didn't add memories today")
-                        .bold()
-                    
-                    Text("There's still time to \n register a new memory")
-                        .padding(.bottom)
-                        .foregroundColor(Color("lightGray"))
-                        .multilineTextAlignment(.center)
-                    
-                    Button {
-                        print("gerar memoria")
-                        showingSheet = true
-                        
-                    } label: {
-                        Text("Add memory")
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 4)
-                            .background(Color("white"))
-                            .foregroundColor(Color("darkGray"))
-                            .cornerRadius(10)
-                            .bold()
-                    }
+            
+            if let urlString = viewModel.user?.imageUrl, let url = URL(string: urlString), Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!){
+                AsyncImage(url: url){ image in
+                    image.resizable()
+                        .scaledToFill()
+                        .frame(height: 250)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                        .padding()
+                } placeholder: {
+                    ProgressView()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity)
+                        .padding()
                 }
             }
-            .frame(maxWidth: .infinity)
-            .background(Color("darkGray"))
-            .cornerRadius(5)
+            
+            
+            
+            else{
+                ZStack {
+                    Image("FinishedStars")
+                        .resizable()
+                        .scaledToFit()
+                    
+                    VStack {
+                        Text("You didn't add memories today")
+                            .bold()
+                        
+                        Text("There's still time to \n register a new memory")
+                            .padding(.bottom)
+                            .foregroundColor(Color("lightGray"))
+                            .multilineTextAlignment(.center)
+                        
+                        Button {
+                            print("gerar memoria")
+                            showingSheet = true
+                            
+                        } label: {
+                            Text("Add memory")
+                                .padding(.horizontal, 32)
+                                .padding(.vertical, 4)
+                                .background(Color("white"))
+                                .foregroundColor(Color("darkGray"))
+                                .cornerRadius(10)
+                                .bold()
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color("darkGray"))
+                .cornerRadius(5)
+            }
             
             Spacer()
         }
@@ -87,6 +109,9 @@ struct CompletedTaskView: View {
         .padding()
         .sheet(isPresented: $showingSheet) {
             ImageRegistrationView()
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
     }
 }

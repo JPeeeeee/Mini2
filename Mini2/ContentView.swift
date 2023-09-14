@@ -40,6 +40,10 @@ struct ContentView: View {
             let savedCurrentTicket = UserDefaults.standard.string(forKey: "currentTicket")
             let savedCurrentTicketTags = UserDefaults.standard.array(forKey: "currentTicketTags") as? [String]
             
+            let savedCompletedTask = UserDefaults.standard.bool(forKey: "completedTask")
+
+            firestoreManager.completedTask = savedCompletedTask
+            
             let savedOnBoarding = UserDefaults.standard.bool(forKey: "onBoarding")
             onBoarding = savedOnBoarding
 

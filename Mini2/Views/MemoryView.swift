@@ -14,12 +14,11 @@ struct MemoryView: View {
     
     var body: some View {
         VStack {
-            
+            if (viewModel.user?.userMemories?.imageUrl != nil){
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]){
-                if (viewModel.user?.userMemories?.imageUrl != nil){
                     ForEach(0..<(viewModel.user?.userMemories?.imageUrl)!.count, id: \.self){ index in
                         NavigationLink{
-                            MemoryDelegate(url: URL(string: (viewModel.user?.userMemories?.imageUrl[index])!))
+                            MemoryDelegate(url: URL(string: (viewModel.user?.userMemories?.imageUrl[index])!), text: (viewModel.user?.userMemories?.associatedText[index])!)
                         } label: {
                             ZStack{
                                 if let urlString = viewModel.user?.userMemories?.imageUrl[index], let url = URL(string: urlString){
@@ -58,27 +57,32 @@ struct MemoryView: View {
                 }
             }
             
-            Image("Polaroid pink and blue")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 168, height: 173)
-                .padding(.bottom)
-                .padding(.top, 64)
-            
-            Text("There is nothing to see here yet")
-                .bold()
-                .font(.headline)
-                .padding(.bottom, 4)
-            
-            Text("Finish your daily task to see \n your memories here!")
-                .foregroundColor(Color("lightGray"))
-                .font(.body)
-                .multilineTextAlignment(.center)
-            
-            Spacer()
+            else{
+                Image("Polaroid pink and blue")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 168, height: 173)
+                    .padding(.bottom)
+                    .padding(.top, 64)
+                
+                Text("There is nothing to see here yet")
+                    .bold()
+                    .font(.headline)
+                    .padding(.bottom, 4)
+                
+                Text("Finish your daily task to see \n your memories here!")
+                    .foregroundColor(Color("lightGray"))
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                
+                Spacer()
+            }
         }
         .frame(maxHeight: .infinity)
         .foregroundColor(Color("white"))
+        .task {
+            try? await viewModel.loadCurrentUser()
+        }
     }
 }
 

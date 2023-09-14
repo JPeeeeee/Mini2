@@ -40,6 +40,7 @@ struct ImageRegistrationView: View {
     @State private var image: Image? = nil
     @State var uiImage: UIImage? = nil
     
+    @EnvironmentObject var firestoreManager: FirestoreManager
     @StateObject private var viewModel = ImageViewPickerModel()
     @State private var url: URL? = nil
 
@@ -128,6 +129,9 @@ struct ImageRegistrationView: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button{
+                        firestoreManager.completedTask = true
+                        UserDefaults.standard.set(firestoreManager.completedTask, forKey: "completedTask")
+                        
                         if (uiImage != nil){
                             // Deletes previous image from database / Skips deletion if it's a new day
                             if (viewModel.user?.imagePath != nil && Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)) {
