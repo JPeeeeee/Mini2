@@ -14,6 +14,7 @@ struct CardSet {
 
 struct TicketCard: View {
     
+    @State private var showingSheet = false
     @EnvironmentObject var firestoreManager: FirestoreManager
     
     private var cardSet: CardSet {
@@ -106,6 +107,7 @@ struct TicketCard: View {
                     Text(firestoreManager.currentTicket)
                     Spacer()
                     Button {
+                        showingSheet = true
                         print("Completar tarefa")
                     } label: {
                         Text("Complete task")
@@ -124,6 +126,9 @@ struct TicketCard: View {
             .frame(maxWidth: .infinity, maxHeight: 500)
             .background(Color("white"))
             .cornerRadius(5)
+            .sheet(isPresented: $showingSheet) {
+                ImageRegistrationView()
+            }
         }
     }
 }

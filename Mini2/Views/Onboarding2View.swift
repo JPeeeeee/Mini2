@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Onboarding2View: View {
+    @StateObject private var viewModel = AuthenticationModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -125,6 +126,14 @@ struct Onboarding2View: View {
                                     .padding(.vertical)
                                     .background(Color("white"))
                                     .cornerRadius(100)
+                            }
+                            // Signs the user in anonymously
+                            .task {
+                                do {
+                                    try await viewModel.signInAnonymous()
+                                } catch {
+                                    print(error)
+                                }
                             }
                         }
                     }
