@@ -17,6 +17,8 @@ struct TicketCard: View {
     @State private var showingSheet = false
     @EnvironmentObject var firestoreManager: FirestoreManager
     
+    @Binding var completed: Bool
+    
     private var cardSet: CardSet {
         
         var tag = ""
@@ -24,7 +26,7 @@ struct TicketCard: View {
         if !firestoreManager.currentTicketTags.isEmpty {
             tag = firestoreManager.currentTicketTags[0]
         } else {
-            tag = "Writing"
+            tag = "Time perception & Mindfulness"
         }
         
         let blueTags = [
@@ -46,12 +48,13 @@ struct TicketCard: View {
         
         let yellowTags = [
             "Self-Care",
-            "With partner"
+            "Romantic"
         ]
         
         let orangeTags = [
             "Time perception & Mindfulness",
-            "Physical activity"
+            "Physical activity",
+            "Outside"
         ]
         
         let greenTags = [
@@ -74,67 +77,67 @@ struct TicketCard: View {
             return CardSet(image: tag, color: Color("green"))
         }
         
-        return CardSet(image: "", color: .white)
+        return CardSet(image: tag, color: Color("yellow"))
     }
     
+    @State var width: CGFloat = UIScreen.main.bounds.width
+    
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                ZStack {
+        VStack {
+            ZStack(alignment: .topTrailing) {
+                HStack {
                     Image(cardSet.image)
                         .resizable()
                         .scaledToFit()
-                        .offset(x: -geo.size.width / 4)
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            Text(cardSet.image)
-                                .font(.callout)
-                                .foregroundColor(Color("white"))
-                            
-                            Spacer()
-                        }
-                    }
+                        .offset(x: -width / 10)
+                    
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
-                .background(cardSet.color)
-                .cornerRadius(5)
                 
-                VStack {
-                    Spacer()
-                    Text(firestoreManager.currentTicket)
-                    Spacer()
-                    Button {
-                        showingSheet = true
-                        print("Completar tarefa")
-                    } label: {
-                        Text("Complete task")
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 4)
-                            .background(.black)
+                HStack {
+                    
+                    VStack {
+                        Text(cardSet.image)
+                            .font(.callout)
                             .foregroundColor(Color("white"))
-                            .cornerRadius(10)
-                            .bold()
                     }
                 }
-                .frame(maxWidth: .infinity,  maxHeight: .infinity)
-                .padding()
-                .background(.white)
             }
-            .frame(maxWidth: .infinity, maxHeight: 500)
-            .background(Color("white"))
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(cardSet.color)
             .cornerRadius(5)
-            .sheet(isPresented: $showingSheet) {
-                ImageRegistrationView()
+            
+            VStack {
+                Text(firestoreManager.currentTicket)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom)
+                    .foregroundColor(Color("darkGray"))
+                Button {
+                  // show modal
+                  print("show modal")
+                } label: {
+                    Text("Complete task")
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 4)
+                        .background(.black)
+                        .foregroundColor(Color("white"))
+                        .cornerRadius(10)
+                        .bold()
+                }
             }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color("white"))
         }
+        .background(Color("white"))
+        .cornerRadius(5)
     }
 }
 
 struct TicketCard_Previews: PreviewProvider {
     static var previews: some View {
+//        TicketCard(completed: .constant(false))
         HomeView()
             .environmentObject(FirestoreManager())
     }

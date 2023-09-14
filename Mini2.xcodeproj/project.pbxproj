@@ -43,6 +43,8 @@
 		F58FB3C52AB1DD7100D68CA0 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3C42AB1DD7100D68CA0 /* AuthenticationModel.swift */; };
 		F58FB3C92AB1E11A00D68CA0 /* ImageRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3C82AB1E11A00D68CA0 /* ImageRegistrationView.swift */; };
 		F58FB3CB2AB1F92000D68CA0 /* ImageViewPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3CA2AB1F92000D68CA0 /* ImageViewPickerModel.swift */; };
+		7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41172AB1E6D700798B4D /* TicketCardView.swift */; };
+		7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,9 @@
 		F58FB3C42AB1DD7100D68CA0 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		F58FB3C82AB1E11A00D68CA0 /* ImageRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRegistrationView.swift; sourceTree = "<group>"; };
 		F58FB3CA2AB1F92000D68CA0 /* ImageViewPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewPickerModel.swift; sourceTree = "<group>"; };
+		7CFD41172AB1E6D700798B4D /* TicketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCardView.swift; sourceTree = "<group>"; };
+		7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskView.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +195,8 @@
 				7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */,
 				7CC408742AA8BC7300C4F567 /* MemoryView.swift */,
 				7C3311B92AB09848001A8088 /* TaskView.swift */,
+				7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */,
+				7CFD41172AB1E6D700798B4D /* TicketCardView.swift */,
 				7CC4086C2AA8A52E00C4F567 /* OnboardingView.swift */,
 				7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */,
 				7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */,
@@ -309,7 +316,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C3311BF2AB0BC55001A8088 /* TicketCard.swift in Sources */,
+				7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */,
 				7C27425A2A964B46001ABC08 /* ContentView.swift in Sources */,
+				7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */,
 				7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */,
 				F58FB3BB2AB1DB3E00D68CA0 /* ImagePicker.swift in Sources */,
 				F58FB3BD2AB1DB7500D68CA0 /* AuthenticationManager.swift in Sources */,
@@ -464,6 +473,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mini2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Collec;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -494,6 +504,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mini2/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Collec;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
