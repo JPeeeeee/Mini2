@@ -15,6 +15,8 @@ struct HomeView: View {
     
     @State var selected = 1
     
+    @State var navHeight = 0.0
+    
     func getBinding() -> Binding<Int> {
         return Binding(get: { return selected }) { v in
             withAnimation {
@@ -60,117 +62,102 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
             }
+            .onAppear {
+                height = geo.size.height
+                print("pickerHeight: \(height)")
+            }
         }
         .frame(maxWidth: .infinity, minHeight: 60)
         .background(Color("darkGray"))
         .cornerRadius(5)
     }
     
-    var body: some View {
-        NavigationStack {
+    var navBar: some View {
+        VStack {
             VStack {
-                GeometryReader { geo in
-                    ScrollView {
-                        Group {
-                            HStack {
-                                Text("Collec")
-                                    .font(.custom("hanoble", size: 32))
-                                    .foregroundColor(Color("white"))
-                                
-                                Spacer()
-                                
-                                NavigationLink {
-                                    FilterScreen()
-                                } label: {
-                                    Image(systemName: "slider.horizontal.3")
-                                        .foregroundColor(Color("white"))
-                                        .bold()
-                                }
+                HStack {
+                    Button {
+                        if selected == 1 {
+                            
+                        } else {
+                            withAnimation {
+                                selected = 1
                             }
-                            pickerView
-                            
-                            Button(action: {
-                                Task {
-                                    try await firestoreManager.uploadFilter(filters: ["With people", "Time perception & Mindfullness"], ticketsArr: [
-                                        
-                                        "Write about everything you were grateful for today. Practice gratitude and think about how it makes you feel",
-                                        "Take a look at the sky during the day, how the colors changed, if it was sunny, if there were stars, how the moon was. Think about how the day goes by and on everything you've done.",
-                                        "Set an alarm clock every 30 minutes. Did the time between them pass quickly or slowly? Did you remember them? How many times did it ring while you were doing something boring? And fun?"
-                                    ])
-                                }
-                            },
-                                   label: {
-                                Text("Send data")
-                            })
-                            .padding()
                         }
-                        .padding()
-                        
-                        TabView(selection: $selected) {
-                            TaskView().tag(1)
-                                .environmentObject(firestoreManager)
-                            
-                            MemoryView().tag(2)
-                                .environmentObject(firestoreManager)
-                        }
-                        .tabViewStyle(.page(indexDisplayMode: .never))
-                        .frame(minHeight: geo.size.height)
-                    }
-                    .background(.black)
-                }
-            }
-        }
-        .navigationBarBackButtonHidden()
-        .onAppear {
-            // apagar este onappear no final!!!!
-            
-            UserDefaults.standard.set(false, forKey: "pickedPrevious")
-            UserDefaults.standard.set(firestoreManager.currentTicket, forKey: "currentTicket")
-            UserDefaults.standard.set(firestoreManager.currentTicketTags, forKey: "currentTicketTags")
-        }
-    }
-    
-    var body2: some View {
-        NavigationStack {
-            ScrollView(showsIndicators: false) {
-                VStack{
-                    Text(firestoreManager.currentTicket)
-                        .font(.largeTitle)
-                        .foregroundColor(Color("white"))
-                    
-                    ForEach(firestoreManager.currentTicketTags, id: \.self) { item in
-                        Text(item)
-                            .font(.largeTitle)
+                    } label: {
+                        Text("Collec")
+                            .font(.custom("hanoble", size: 32))
                             .foregroundColor(Color("white"))
                     }
                     
                     
+                    Spacer()
+                    
                     NavigationLink {
                         FilterScreen()
                     } label: {
-                        Text("Filter Screen")
+                        Image(systemName: "slider.horizontal.3")
+                            .foregroundColor(Color("white"))
+                            .bold()
                     }
-
-                    
-                    Button(action: {
-                        if !firestoreManager.selectedTags.isEmpty {
-                            firestoreManager.pickTicket()
-                            print(firestoreManager.currentTicket)
-                        } else {
-                            print("n tem nada marcado cara")
-                        }
-                    },
-                           label: {
-                        Text("print data")
-                    })
-                    .padding()
                 }
-                .padding(.top, height + 16)
+                .padding(.horizontal)
             }
-            
-            
-            .frame(maxWidth: .infinity)
+            .padding(.vertical)
             .background(.black)
+            .overlay {
+                GeometryReader { navReader in
+                    Rectangle().fill(.clear)
+                        .onAppear {
+                            navHeight = navReader.size.height
+                            print("navHeight: \(navHeight)")
+                        }
+                }
+            }
+            Spacer()
+        }
+    }
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                GeometryReader { geo in
+                    ScrollView (showsIndicators: false) {
+                        pickerView
+                            .padding()
+                            .padding(.top, 60)
+                        
+                        Group {
+                            if selected == 1 {
+                                TaskView().tag(1)
+                                    .transition(.move(edge: .leading))
+                                    .environmentObject(firestoreManager)
+                                
+                            } else if selected == 2 {
+                                MemoryView().tag(2)
+                                    .transition(.move(edge: .trailing))
+                                    .environmentObject(firestoreManager)
+                            }
+                        }
+                        .frame(maxHeight: geo.size.height - navHeight - height - 60)
+                    }
+                    .background(.black)
+                }
+                
+                navBar
+                
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            // apagar este userdefaults no final!!!!
+            UserDefaults.standard.set(false, forKey: "pickedPrevious")
+            
+            
+            UserDefaults.standard.set(firestoreManager.currentTicket, forKey: "currentTicket")
+            UserDefaults.standard.set(firestoreManager.currentTicketTags, forKey: "currentTicketTags")
+            
+            firestoreManager.populatePossibleTickets()
         }
     }
 }
