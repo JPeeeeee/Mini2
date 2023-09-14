@@ -477,6 +477,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mini2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Collec;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allows user to capture a photo or video to upload to their family circle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -508,6 +509,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mini2/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Collec;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allows user to capture a photo or video to upload to their family circle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
