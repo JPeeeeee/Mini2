@@ -19,43 +19,23 @@ final class ImageViewPickerModel: ObservableObject {
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
     
-    func addUserTestPreference(text: String){
+    func addUserMemory(userMemories: UserMemories){
         guard let user else {return}
         
         Task{
-            try await UserManager.shared.addUserTestPreference(userId: user.userId, testPreference: text)
+            try await UserManager.shared.addUserMemory(userId: user.userId, userMemories: userMemories)
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
     }
-    
-    func deleteUserTestPreference(text: String){
+
+    func deleteUserMemory(userMemories: UserMemories){
         guard let user else {return}
-        
+
         Task{
-            try await UserManager.shared.deleteUserTestPreference(userId: user.userId, testPreference: text)
+            try await UserManager.shared.deleteUserMemory(userId: user.userId, userMemories: userMemories)
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
     }
-    
-//    func addTestFavouriteMap(){
-//        guard let user else {return}
-//        let testMap = testMap(id: "1", title: "testMap", isSomething: true)
-//        
-//        Task{
-//            try await UserManager.shared.addTestFavouriteMap(userId: user.userId, testMap: testMap)
-//            self.user = try await UserManager.shared.getUser(userId: user.userId)
-//        }
-//    }
-//
-//    func deleteTestFavouriteMap(){
-//        guard let user else {return}
-//        let testMap = testMap(id: "1", title: "testMap", isSomething: true)
-//
-//        Task{
-//            try await UserManager.shared.deleteTestFavouriteMap(userId: user.userId, testMap: testMap)
-//            self.user = try await UserManager.shared.getUser(userId: user.userId)
-//        }
-//    }
     
     func deleteProfileImage(){
         guard let user, let path = user.imagePath else { return }
@@ -65,7 +45,20 @@ final class ImageViewPickerModel: ObservableObject {
         }
     }
     
-    func saveProfileImage(image: UIImage){
+    func setMemory(index: Int, dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        guard var user else { return }
+        
+        user.setMemory(index: index, dateCreated: dateCreated, imagePath: imagePath, imageUrl: imageUrl, associatedText: associatedText)
+    }
+    
+    func setLocalImagePathNil(){
+        guard var user else { return }
+        
+        user.setLocalImagePath(newPath: "")
+        self.user = user
+    }
+    
+    func saveProfileImage(image: UIImage, text: String){
         guard var user else { return }
 
         Task {
@@ -79,6 +72,17 @@ final class ImageViewPickerModel: ObservableObject {
             self.user = user
 
             let url = try await StorageManager.shared.getUrlForImage(path: path)
+            
+            // If last memory was today just set new memory
+            if(Calendar.current.isDateInToday((user.userMemories?.dateCreated.last)!)){
+                // Sets today's memory
+                user.setMemory(index: (user.userMemories?.dateCreated.count)! - 1, dateCreated: Date(), imagePath: path, imageUrl: url.absoluteString, associatedText: text)
+            } else {
+                user.addMemory(dateCreated: Date(), imagePath: path, imageUrl: url.absoluteString, associatedText: text)
+            }
+            
+            addUserMemory(userMemories: user.userMemories!)
+            
             try await UserManager.shared.updateImagePath(userId: user.userId, path: path, url: url.absoluteString)
         }
     }

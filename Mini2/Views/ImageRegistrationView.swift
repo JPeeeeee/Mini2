@@ -68,7 +68,7 @@ struct ImageRegistrationView: View {
                                     .padding()
                             }
                             
-                            else if let urlString = viewModel.user?.imageUrl, let url = URL(string: urlString){
+                            else if let urlString = viewModel.user?.imageUrl, let url = URL(string: urlString), Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!){
                                 AsyncImage(url: url){ image in
                                     image.resizable()
                                         .scaledToFill()
@@ -128,6 +128,16 @@ struct ImageRegistrationView: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button{
+                        if (uiImage != nil){
+                            // Deletes previous image from database / Skips deletion if it's a new day
+                            if (viewModel.user?.imagePath != nil && Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)) {
+                                viewModel.deleteProfileImage()
+                            }
+                            
+                            // Saves new image onto database
+                            viewModel.saveProfileImage(image: uiImage!, text: memoryText)
+                        }
+                        
                         dismiss()
                     } label: {
                         HStack{
@@ -168,20 +178,18 @@ struct ImageRegistrationView: View {
                     let url = try? await StorageManager.shared.getUrlForImage(path: path)
                     self.url = url
                 }
-            }
-            // Saves picked image
-            .onChange(of: uiImage, perform: { newValue in
-                if let newValue{
-                    
-                    // Deletes previous image from database
-                    if (viewModel.user?.imagePath != nil) {
-                        viewModel.deleteProfileImage()
-                    }
-                    
-                    // Saves new image onto database
-                    viewModel.saveProfileImage(image: newValue)
+                
+                // If the user has no memories, create an empty memory
+                if viewModel.user?.userMemories == nil {
+                    let userMemory = UserMemories(dateCreated: [Date()], imagePath: [""], imageUrl: [""], associatedText: [""])
+                    viewModel.addUserMemory(userMemories: userMemory)
                 }
-            })
+                
+                // Has memories and it's on the same day
+                else if (Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)){
+                    memoryText = (viewModel.user?.userMemories?.associatedText.last)!
+                }
+            }
         }
     }
 }

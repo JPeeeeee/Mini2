@@ -9,11 +9,26 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct userMemory: Codable {
-    let dateCreated: Date?
-    var imagePath: String?
-    let imageUrl: String?
-    let associatedText: String
+struct UserMemories: Codable {
+    var dateCreated: [Date]
+    var imagePath: [String?]
+    var imageUrl: [String?]
+    var associatedText: [String]
+    
+    mutating func addMemory(dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        self.dateCreated.append(dateCreated)
+        self.imagePath.append(imagePath)
+        self.imageUrl.append(imageUrl)
+        self.associatedText.append(associatedText)
+    }
+    
+    
+    mutating func setMemory(index: Int, dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        self.dateCreated[index] = dateCreated
+        self.imagePath[index] = imagePath
+        self.imageUrl[index] = imageUrl
+        self.associatedText[index] = associatedText
+    }
 }
 
 struct DBUser: Codable {
@@ -21,7 +36,7 @@ struct DBUser: Codable {
     let isAnonymous: Bool?
     let dateCreated: Date?
     let isTestBool: Bool?
-    let userMemories: [userMemory]?
+    var userMemories: UserMemories?
     var imagePath: String?
     let imageUrl: String?
     
@@ -40,7 +55,7 @@ struct DBUser: Codable {
         isAnonymous: Bool? = nil,
         dateCreated: Date? = nil,
         isTestBool: Bool? = nil,
-        userMemories: [userMemory]? = nil,
+        userMemories: UserMemories? = nil,
         imagePath: String? = nil,
         imageUrl: String? = nil
     ) {
@@ -51,6 +66,14 @@ struct DBUser: Codable {
         self.userMemories = userMemories
         self.imagePath = imagePath
         self.imageUrl = imageUrl
+    }
+    
+    mutating func addMemory(dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        userMemories?.addMemory(dateCreated: dateCreated, imagePath: imagePath, imageUrl: imageUrl, associatedText: associatedText)
+    }
+    
+    mutating func setMemory(index: Int, dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        userMemories?.setMemory(index: index, dateCreated: dateCreated, imagePath: imagePath, imageUrl: imageUrl, associatedText: associatedText)
     }
     
     mutating func setLocalImagePath(newPath: String){
@@ -74,7 +97,7 @@ struct DBUser: Codable {
         self.isAnonymous = try container.decodeIfPresent(Bool.self, forKey: .isAnonymous)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isTestBool = try container.decodeIfPresent(Bool.self, forKey: .isTestBool)
-        self.userMemories = try container.decodeIfPresent([userMemory].self, forKey: .userMemories)
+        self.userMemories = try container.decodeIfPresent(UserMemories.self, forKey: .userMemories)
         self.imagePath = try container.decodeIfPresent(String.self, forKey: .imagePath)
         self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
     }
@@ -148,39 +171,24 @@ final class UserManager {
         try await userDocument(userId: user.userId).delete()
     }
     
-    func addUserTestPreference(userId: String, userMemory: userMemory) async throws {
-        let data: [String:Any] = [
-            DBUser.CodingKeys.userMemories.rawValue : FieldValue.arrayUnion([userMemory])
+    // Adds and deletes userMemories
+    func addUserMemory(userId: String, userMemories: UserMemories) async throws {
+        guard let data = try? encoder.encode(userMemories) else{
+            throw URLError(.badURL)
+        }
+
+        let dict: [String:Any] = [
+            DBUser.CodingKeys.userMemories.rawValue : data
         ]
-        
-        try await userDocument(userId: userId).updateData(data)
+
+        try await userDocument(userId: userId).updateData(dict)
     }
-    
-    func deleteUserTestPreference(userId: String, userMemory: userMemory) async throws {
-        let data: [String:Any] = [
-            DBUser.CodingKeys.userMemories.rawValue : FieldValue.arrayRemove([userMemory])
+
+    func deleteUserMemory(userId: String, userMemories: UserMemories) async throws {
+        let data: [String:Any?] = [
+            DBUser.CodingKeys.userMemories.rawValue : nil
         ]
-        
-        try await userDocument(userId: userId).updateData(data)
+
+        try await userDocument(userId: userId).updateData(data as [AnyHashable : Any])
     }
-    
-//    func addUserImage(userId: String, testMap: userImages) async throws {
-//        guard let data = try? encoder.encode(testMap) else{
-//            throw URLError(.badURL)
-//        }
-//
-//        let dict: [String:Any] = [
-//            DBUser.CodingKeys.testFavouriteMap.rawValue : data
-//        ]
-//
-//        try await userDocument(userId: userId).updateData(dict)
-//    }
-//
-//    func deleteUserImage(userId: String, testMap: userImages) async throws {
-//        let data: [String:Any?] = [
-//            DBUser.CodingKeys.testFavouriteMap.rawValue : nil
-//        ]
-//
-//        try await userDocument(userId: userId).updateData(data as [AnyHashable : Any])
-//    }
 }

@@ -130,6 +130,12 @@ struct Onboarding2View: View {
                             // Signs the user in anonymously
                             .task {
                                 do {
+                                    try AuthenticationManager.shared.signOut()
+                                } catch {
+                                    print(error)
+                                }
+                                
+                                do {
                                     try await viewModel.signInAnonymous()
                                 } catch {
                                     print(error)
