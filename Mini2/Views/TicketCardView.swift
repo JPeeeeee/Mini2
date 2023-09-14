@@ -11,9 +11,6 @@ struct TicketCardView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
 
-    
-    @Binding var completed: Bool
-    
     var body: some View {
         VStack {
             HStack {
@@ -63,7 +60,7 @@ struct TicketCardView: View {
             }
             .padding(.bottom)
             
-            TicketCard(completed: $completed)
+            TicketCard()
             
             ZStack {
 
@@ -97,7 +94,7 @@ struct TicketCardView: View {
 
 struct TicketCardView_Previews: PreviewProvider {
     static var previews: some View {
-        TicketCardView(completed: .constant(false))
+        TicketCardView()
 //        HomeView()
             .environmentObject(FirestoreManager())
     }

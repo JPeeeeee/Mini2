@@ -150,9 +150,6 @@ struct HomeView: View {
         }
         .navigationBarBackButtonHidden()
         .onAppear {
-            // apagar este userdefaults no final!!!!
-            UserDefaults.standard.set(false, forKey: "pickedPrevious")
-            
             
             UserDefaults.standard.set(firestoreManager.currentTicket, forKey: "currentTicket")
             UserDefaults.standard.set(firestoreManager.currentTicketTags, forKey: "currentTicketTags")
