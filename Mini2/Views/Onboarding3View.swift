@@ -69,7 +69,7 @@ struct Onboarding3View: View {
                         .bold()
                         .padding(.top, 32)
                     
-                    Text("Choose the filters that intrest you the most so we can give you your first activity!")
+                    Text("Choose the filters that interest you the most so we can give you your first activity!")
                         .font(.callout)
                 }
                 .foregroundColor(Color("white"))

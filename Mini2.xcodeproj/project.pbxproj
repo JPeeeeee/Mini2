@@ -35,7 +35,10 @@
 		7CF158EF2AAF552600C52C21 /* DailyTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */; };
 		7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */; };
 		7CFD2ABB2AA9057100AE4562 /* Onboarding3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */; };
+		7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41172AB1E6D700798B4D /* TicketCardView.swift */; };
+		7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */; };
 		F502F9D72AB31D5A0017927D /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502F9D62AB31D5A0017927D /* MemoryViewModel.swift */; };
+		F502F9DD2AB5D1EE0017927D /* MemoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F502F9DC2AB5D1EE0017927D /* MemoryDelegate.swift */; };
 		F58FB3BB2AB1DB3E00D68CA0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3BA2AB1DB3E00D68CA0 /* ImagePicker.swift */; };
 		F58FB3BD2AB1DB7500D68CA0 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3BC2AB1DB7500D68CA0 /* AuthenticationManager.swift */; };
 		F58FB3C02AB1DB8700D68CA0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3BF2AB1DB8700D68CA0 /* UserManager.swift */; };
@@ -43,8 +46,6 @@
 		F58FB3C52AB1DD7100D68CA0 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3C42AB1DD7100D68CA0 /* AuthenticationModel.swift */; };
 		F58FB3C92AB1E11A00D68CA0 /* ImageRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3C82AB1E11A00D68CA0 /* ImageRegistrationView.swift */; };
 		F58FB3CB2AB1F92000D68CA0 /* ImageViewPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58FB3CA2AB1F92000D68CA0 /* ImageViewPickerModel.swift */; };
-		7CFD41182AB1E6D700798B4D /* TicketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41172AB1E6D700798B4D /* TicketCardView.swift */; };
-		7CFD411A2AB1E90600798B4D /* CompletedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,16 +73,16 @@
 		7CF158EE2AAF552600C52C21 /* DailyTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTicketView.swift; sourceTree = "<group>"; };
 		7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
 		7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3View.swift; sourceTree = "<group>"; };
+		7CFD41172AB1E6D700798B4D /* TicketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCardView.swift; sourceTree = "<group>"; };
+		7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskView.swift; sourceTree = "<group>"; };
 		F502F9D62AB31D5A0017927D /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
+		F502F9DC2AB5D1EE0017927D /* MemoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDelegate.swift; sourceTree = "<group>"; };
 		F58FB3BA2AB1DB3E00D68CA0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F58FB3BC2AB1DB7500D68CA0 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		F58FB3BF2AB1DB8700D68CA0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F58FB3C42AB1DD7100D68CA0 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		F58FB3C82AB1E11A00D68CA0 /* ImageRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRegistrationView.swift; sourceTree = "<group>"; };
 		F58FB3CA2AB1F92000D68CA0 /* ImageViewPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewPickerModel.swift; sourceTree = "<group>"; };
-		7CFD41172AB1E6D700798B4D /* TicketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCardView.swift; sourceTree = "<group>"; };
-		7CFD41192AB1E90600798B4D /* CompletedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskView.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +202,7 @@
 				7CFD2AB82AA9044D00AE4562 /* Onboarding2View.swift */,
 				7CFD2ABA2AA9057100AE4562 /* Onboarding3View.swift */,
 				F58FB3C82AB1E11A00D68CA0 /* ImageRegistrationView.swift */,
+				F502F9DC2AB5D1EE0017927D /* MemoryDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,6 +331,7 @@
 				F58FB3CB2AB1F92000D68CA0 /* ImageViewPickerModel.swift in Sources */,
 				7CF158EF2AAF552600C52C21 /* DailyTicketView.swift in Sources */,
 				7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */,
+				F502F9DD2AB5D1EE0017927D /* MemoryDelegate.swift in Sources */,
 				7C3311BA2AB09848001A8088 /* TaskView.swift in Sources */,
 				7CFD2AB92AA9044D00AE4562 /* Onboarding2View.swift in Sources */,
 				F58FB3C52AB1DD7100D68CA0 /* AuthenticationModel.swift in Sources */,

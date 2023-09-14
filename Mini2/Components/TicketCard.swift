@@ -115,6 +115,7 @@ struct TicketCard: View {
                     .foregroundColor(Color("darkGray"))
                 Button {
                   // show modal
+                    showingSheet = true
                   print("show modal")
                 } label: {
                     Text("Complete task")
@@ -132,6 +133,9 @@ struct TicketCard: View {
         }
         .background(Color("white"))
         .cornerRadius(5)
+        .sheet(isPresented: $showingSheet) {
+            ImageRegistrationView()
+        }
     }
 }
 

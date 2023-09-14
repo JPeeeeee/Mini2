@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CompletedTaskView: View {
+    @State private var showingSheet = false
+    
     var body: some View {
         VStack {
             ZStack {
@@ -60,6 +62,8 @@ struct CompletedTaskView: View {
                     
                     Button {
                         print("gerar memoria")
+                        showingSheet = true
+                        
                     } label: {
                         Text("Add memory")
                             .padding(.horizontal, 32)
@@ -78,6 +82,9 @@ struct CompletedTaskView: View {
         }
         .foregroundColor(Color("white"))
         .padding()
+        .sheet(isPresented: $showingSheet) {
+            ImageRegistrationView()
+        }
     }
 }
 
