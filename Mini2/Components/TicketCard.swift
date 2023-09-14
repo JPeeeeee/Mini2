@@ -87,7 +87,7 @@ struct TicketCard: View {
                     Image(cardSet.image)
                         .resizable()
                         .scaledToFit()
-                        .offset(x: -width / 10)
+                        .frame(maxWidth: width/2, minHeight: 200)
                     
                     Spacer()
                 }

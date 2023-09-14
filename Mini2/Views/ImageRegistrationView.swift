@@ -51,7 +51,7 @@ struct ImageRegistrationView: View {
                     .ignoresSafeArea()
                 
                 VStack{
-                    Text("Review your past photos and reflect on the things you've experienced. What are those memories like, what makes you happy and what was memorable?")
+                    Text(firestoreManager.currentTicket)
                         .padding()
                         .foregroundColor(.white)
                     
@@ -116,7 +116,8 @@ struct ImageRegistrationView: View {
                     
                     TextField("", text: $memoryText)
                         .placeholder(when: memoryText.isEmpty) {
-                                Text("Today I thought about...").foregroundColor(Color("lightGray"))
+                                Text("Today...")
+                                    .foregroundColor(Color("lightGray"))
                         }
                         .onSubmit {
                             print("Authenticating…")

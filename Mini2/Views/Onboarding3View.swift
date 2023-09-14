@@ -150,6 +150,15 @@ struct Onboarding3View: View {
             }
             .padding(.horizontal, 32)
         }
+        .onDisappear {
+            
+            firestoreManager.populatePossibleTickets()
+            
+            if !firestoreManager.selectedTags.isEmpty {
+                let arr = [String](firestoreManager.selectedTags)
+                UserDefaults.standard.set(arr, forKey: "selectedTags")
+            }
+        }
     }
 }
 
