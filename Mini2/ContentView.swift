@@ -13,10 +13,12 @@ struct ContentView: View {
     
     @State var onBoarding = false
     
+    @State private var daily = false
+    
     var body: some View {
         Group {
             if onBoarding == true {
-                if check() {
+                if daily {
                     DailyTicketView()
                         .environmentObject(firestoreManager)
                 } else {
@@ -29,6 +31,9 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            
+            daily = check()
+            
             let savedTags = UserDefaults.standard.array(forKey: "selectedTags")
             let savedRerolled = UserDefaults.standard.bool(forKey: "pickedPrevious")
             

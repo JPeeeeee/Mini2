@@ -45,7 +45,7 @@ struct MemoryView: View {
                                         VStack (alignment: .center){
                                             Text(String(calendarDate.day!))
                                                 .font(.system(size: 15))
-//                                            Text(date.monthMedium)
+                                            Text(date.monthMedium)
                                                 .font(.system(size: 13))
                                         }
                                         .foregroundColor(.black)
@@ -87,4 +87,15 @@ struct MemoryView_Previews: PreviewProvider {
         HomeView()
             .environmentObject(FirestoreManager())
     }
+}
+
+extension Formatter {
+    static let monthMedium: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "LLL"
+        return formatter
+    }()
+}
+extension Date {
+    var monthMedium: String  { return Formatter.monthMedium.string(from: self) }
 }

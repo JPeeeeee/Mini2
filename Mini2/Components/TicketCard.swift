@@ -17,8 +17,6 @@ struct TicketCard: View {
     @State private var showingSheet = false
     @EnvironmentObject var firestoreManager: FirestoreManager
     
-    @Binding var completed: Bool
-    
     private var cardSet: CardSet {
         
         var tag = ""
@@ -115,7 +113,8 @@ struct TicketCard: View {
                     .foregroundColor(Color("darkGray"))
                 Button {
                   // show modal
-                    showingSheet = true
+                    firestoreManager.completedTask = true
+                    //showingSheet = true
                   print("show modal")
                 } label: {
                     Text("Complete task")

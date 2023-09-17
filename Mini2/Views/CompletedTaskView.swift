@@ -20,6 +20,7 @@ struct CompletedTaskView: View {
                 VStack {
                     Text("Excelent work!")
                         .bold()
+                        .padding(.top)
                     
                     Text("You finished your daily task")
                         .padding(.bottom)
@@ -31,6 +32,7 @@ struct CompletedTaskView: View {
                         .frame(width: 168, height: 173)
                 }
             }
+            .frame(maxWidth: .infinity)
             .background(Color("darkGray"))
             .cornerRadius(5)
             
@@ -75,6 +77,7 @@ struct CompletedTaskView: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
             .background(Color("darkGray"))
             .cornerRadius(5)
             

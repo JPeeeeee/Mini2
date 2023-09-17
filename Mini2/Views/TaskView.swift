@@ -10,14 +10,12 @@ import SwiftUI
 struct TaskView: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
     
-    @State var completedTask: Bool = false
-    
     var body: some View {
         Group {
-            if completedTask {
+            if firestoreManager.completedTask {
                 CompletedTaskView()
             } else {
-                TicketCardView(completed: $completedTask)
+                TicketCardView()
             }
         }
     }
