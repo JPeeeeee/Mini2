@@ -115,8 +115,8 @@ struct DBUser: Codable {
 }
 
 final class UserManager {
-    
     static let shared = UserManager()
+    private var localImages = [UIImage]()
     private init() { }
     
     private let userCollection = Firestore.firestore().collection("users")
@@ -190,5 +190,36 @@ final class UserManager {
         ]
 
         try await userDocument(userId: userId).updateData(data as [AnyHashable : Any])
+    }
+    
+    public func getLocalImages() -> [UIImage]{
+        return localImages
+    }
+    
+    public func populateLocalImages() async throws -> [UIImage]{
+        if (localImages.isEmpty){
+            let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
+            let user = try await getUser(userId: authDataResult.uid)
+            
+            if let memories = user.userMemories{
+                print("DEBUG2 MEMORIES")
+                for path in memories.imagePath{
+                    if let image = try? await StorageManager.shared.getImage(userId: user.userId, path: path!){
+                        print("DEBUG2 IMAGES")
+                        self.localImages.append(image)
+                    }
+                }
+            }
+        }
+        
+        return localImages
+    }
+    
+    public func appendLocalImage(uiImage: UIImage){
+        self.localImages.append(uiImage)
+    }
+    
+    public func deleteLocalImage(){
+        self.localImages.popLast()
     }
 }

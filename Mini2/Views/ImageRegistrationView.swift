@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-struct TestBaseView: View {
-    @State private var showingSheet = false
-    
-    var body: some View {
-        List{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        }
-        .sheet(isPresented: $showingSheet) {
-            ImageRegistrationView()
-        }
-        .navigationTitle("Test")
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button{
-                    showingSheet.toggle()
-                } label: {
-                    Image(systemName: "gear")
-                        .font(.headline)
-                }
-            }
-        }
-    }
-}
-
 struct ImageRegistrationView: View {
     @Environment(\.dismiss) var dismiss
     @State var memoryText: String = ""
@@ -43,6 +19,7 @@ struct ImageRegistrationView: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
     @StateObject private var viewModel = ImageViewPickerModel()
     @State private var url: URL? = nil
+    @Binding var localImages: [UIImage]
 
     var body: some View {
         NavigationStack{
@@ -114,16 +91,15 @@ struct ImageRegistrationView: View {
                         ImagePicker(isShown: $showImagePicker, image: $image, uiImage: $uiImage, usingCamera: usingCamera)
                     }
                     
-                    TextField("", text: $memoryText)
+                    TextField("", text: $memoryText, axis: .vertical)
                         .placeholder(when: memoryText.isEmpty) {
                                 Text("Today...")
                                     .foregroundColor(Color("lightGray"))
                         }
-                        .onSubmit {
-                            print("Authenticating…")
-                        }
-                        .foregroundColor(Color("white"))
+                        .lineLimit(4...)
                         .padding()
+                        .padding(.vertical, 16)
+                        .foregroundColor(Color("white"))
                     Spacer()
                 }
             }
@@ -137,10 +113,16 @@ struct ImageRegistrationView: View {
                             // Deletes previous image from database / Skips deletion if it's a new day
                             if (viewModel.user?.imagePath != nil && Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)) {
                                 viewModel.deleteProfileImage()
+                                UserManager.shared.deleteLocalImage()
+                                localImages.popLast()
                             }
                             
                             // Saves new image onto database
                             viewModel.saveProfileImage(image: uiImage!, text: memoryText)
+                            
+                            // Saves to local
+                            UserManager.shared.appendLocalImage(uiImage: uiImage!)
+                            localImages.append(uiImage!)
                         }
                         
                         dismiss()
@@ -150,6 +132,7 @@ struct ImageRegistrationView: View {
                                 .font(.title2)
                         }
                     }
+                    .disabled(image == nil || memoryText == "")
                 }
                 
                 ToolbarItem(placement: .principal) {
@@ -178,7 +161,7 @@ struct ImageRegistrationView: View {
             .task {
                 print("DEBUG2 TASK")
                 try? await viewModel.loadCurrentUser()
-                
+                                
                 if let path = viewModel.user?.imagePath {
                     let url = try? await StorageManager.shared.getUrlForImage(path: path)
                     self.url = url
@@ -193,11 +176,23 @@ struct ImageRegistrationView: View {
                 // Has memories and it's on the same day
                 else if (Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)){
                     memoryText = (viewModel.user?.userMemories?.associatedText.last)!
+                    if(!localImages.isEmpty){
+                        print("DEBUG2 NotEmpty")
+                        self.image = Image(uiImage: localImages.last!)
+                    }
                 }
             }
         }
     }
 }
+
+//struct ImageRegistrationPreview: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack{
+//            ImageRegistrationView(localImages: Binding.constant([UIImage]()))
+//        }
+//    }
+//}
 
 // Used for the TextField placeholder text
 extension View {
@@ -209,14 +204,6 @@ extension View {
         ZStack(alignment: alignment) {
             placeholder().opacity(shouldShow ? 1 : 0)
             self
-        }
-    }
-}
-
-struct ImageRegistrationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack{
-            TestBaseView()
         }
     }
 }

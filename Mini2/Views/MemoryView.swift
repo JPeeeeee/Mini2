@@ -16,23 +16,17 @@ struct MemoryView: View {
         VStack {
             if (viewModel.user?.userMemories?.imageUrl != nil){
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]){
-                    ForEach(0..<(viewModel.user?.userMemories?.imageUrl)!.count, id: \.self){ index in
+                ForEach(0..<(UserManager.shared.getLocalImages().count), id: \.self){ index in
                         NavigationLink{
                             MemoryDelegate(url: URL(string: (viewModel.user?.userMemories?.imageUrl[index])!), text: (viewModel.user?.userMemories?.associatedText[index])!)
                         } label: {
                             ZStack{
-                                if let urlString = viewModel.user?.userMemories?.imageUrl[index], let url = URL(string: urlString){
-                                    AsyncImage(url: url){ image in
-                                        image.resizable()
+                                if (!UserManager.shared.getLocalImages().isEmpty){
+                                    Image(uiImage: UserManager.shared.getLocalImages()[index])
+                                        .resizable()
                                             .frame(width: 185, height:185, alignment: .center)
                                             .clipped()
                                             .padding()
-                                    } placeholder: {
-                                        ProgressView()
-                                            .frame(width: 185, height:185, alignment: .center)
-                                            .padding()
-                                    }
-                                }
                                 
                                 ZStack{
                                     Rectangle().frame(width: 55, height: 46, alignment: .topLeading)
@@ -51,6 +45,7 @@ struct MemoryView: View {
                                     }
                                 }
                                 .offset(x: -55, y: -55)
+                                }
                             }
                         }
                     }

@@ -145,6 +145,10 @@ struct DailyTicketView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black)
             .onAppear {
+                
+                // Resets completedTask state to false
+                firestoreManager.completedTask = false
+                
                 firestoreManager.populatePossibleTickets()
                 
                 if firestoreManager.currentTicket == "" {

@@ -10,6 +10,7 @@ import SwiftUI
 struct CompletedTaskView: View {
     @State private var showingSheet = false
     @StateObject private var viewModel = MemoryViewModel()
+    @Binding var localImages: [UIImage]
     
     var body: some View {
         VStack {
@@ -37,36 +38,50 @@ struct CompletedTaskView: View {
             .background(Color("darkGray"))
             .cornerRadius(5)
             
-            
-            
             HStack {
                 Text("Generated memory:")
                     .font(.title3)
                 
                 Spacer()
                 
-                Image(systemName: "square.and.pencil")
-                    .font(.title2)
-            }
-            
-            
-            if let urlString = viewModel.user?.imageUrl, let url = URL(string: urlString), Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!){
-                AsyncImage(url: url){ image in
-                    image.resizable()
-                        .scaledToFill()
-                        .frame(height: 250)
-                        .frame(maxWidth: .infinity)
-                        .clipped()
-                        .padding()
-                } placeholder: {
-                    ProgressView()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity)
-                        .padding()
+                Button {
+                    print("Modificar memória")
+                    showingSheet = true
+                    
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .font(.title2)
                 }
             }
             
+            if let user = viewModel.user, Calendar.current.isDateInToday((user.userMemories?.dateCreated.last)!){
+                if (!localImages.isEmpty){
+                    Image(uiImage: localImages.last!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 250)
+                        .frame(maxWidth: 300)
+                        .clipped()
+                        .padding()
+                }
             
+                else if let urlString = user.imageUrl, let url = URL(string: urlString){
+                    AsyncImage(url: url){ image in
+                        image.resizable()
+                            .scaledToFill()
+                            .frame(height: 250)
+                            .frame(maxWidth: 300)
+                            .clipped()
+                            .padding()
+                    } placeholder: {
+                        ProgressView()
+                            .scaledToFill()
+                            .frame(height: 250)
+                            .frame(maxWidth: 300)
+                            .padding()
+                    }
+                }
+            }
             
             else{
                 ZStack {
@@ -108,16 +123,10 @@ struct CompletedTaskView: View {
         .foregroundColor(Color("white"))
         .padding()
         .sheet(isPresented: $showingSheet) {
-            ImageRegistrationView()
+            ImageRegistrationView(localImages: self.$localImages)
         }
         .task {
             try? await viewModel.loadCurrentUser()
         }
-    }
-}
-
-struct CompletedTaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        CompletedTaskView()
     }
 }

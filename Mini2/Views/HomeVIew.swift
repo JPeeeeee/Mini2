@@ -139,7 +139,7 @@ struct HomeView: View {
                                     .environmentObject(firestoreManager)
                             }
                         }
-                        .frame(maxHeight: geo.size.height - navHeight - height - 60)
+                        .frame(maxHeight: geo.size.height)
                     }
                     .background(.black)
                 }

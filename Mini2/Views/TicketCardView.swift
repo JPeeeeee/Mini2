@@ -10,6 +10,7 @@ import SwiftUI
 struct TicketCardView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
+    @Binding var localImages: [UIImage]
 
     var body: some View {
         VStack {
@@ -60,7 +61,7 @@ struct TicketCardView: View {
             }
             .padding(.bottom)
             
-            TicketCard()
+            TicketCard(localImages: self.$localImages)
             
             ZStack {
 
@@ -87,15 +88,6 @@ struct TicketCardView: View {
             .background(Color("darkGray"))
             .cornerRadius(5)
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-    }
-}
-
-struct TicketCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        TicketCardView()
-//        HomeView()
-            .environmentObject(FirestoreManager())
     }
 }

@@ -16,6 +16,7 @@ struct TicketCard: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var firestoreManager: FirestoreManager
+    @Binding var localImages: [UIImage]
     
     private var cardSet: CardSet {
         
@@ -112,8 +113,6 @@ struct TicketCard: View {
                     .padding(.bottom)
                     .foregroundColor(Color("darkGray"))
                 Button {
-                  // show modal
-                    //firestoreManager.completedTask = true
                     showingSheet = true
                   print("show modal")
                 } label: {
@@ -133,7 +132,7 @@ struct TicketCard: View {
         .background(Color("white"))
         .cornerRadius(5)
         .sheet(isPresented: $showingSheet) {
-            ImageRegistrationView()
+            ImageRegistrationView(localImages: self.$localImages)
         }
     }
 }

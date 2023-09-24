@@ -9,14 +9,19 @@ import SwiftUI
 
 struct TaskView: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
+    @State private var localImages = [UIImage]()
     
     var body: some View {
         Group {
             if firestoreManager.completedTask {
-                CompletedTaskView()
+                CompletedTaskView(localImages: self.$localImages)
             } else {
-                TicketCardView()
+                TicketCardView(localImages: self.$localImages)
             }
+        }
+        .task {
+            print("DEBUG2 POPULATE")
+            localImages = try! await UserManager.shared.populateLocalImages()
         }
     }
 }

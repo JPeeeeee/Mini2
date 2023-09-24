@@ -6,5 +6,7 @@
 	<array>
 		<string>hanoble.otf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Allows user to capture a photo or video to upload to their family circle</string>
 </dict>
 </plist>
