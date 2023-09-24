@@ -19,7 +19,7 @@ struct ImageRegistrationView: View {
     @EnvironmentObject var firestoreManager: FirestoreManager
     @StateObject private var viewModel = ImageViewPickerModel()
     @State private var url: URL?
-    @Binding var localImages: [UIImage]
+    private var localImages = UserManager.shared.getLocalImages()
 
     var body: some View {
         NavigationStack{
@@ -115,7 +115,7 @@ struct ImageRegistrationView: View {
                             if (viewModel.user?.imagePath != nil && Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)) {
                                 viewModel.deleteProfileImage()
                                 UserManager.shared.deleteLocalImage()
-                                localImages.popLast()
+                                UserManager.shared.deleteLocalMemory()
                             }
                             
                             // Saves new image onto database
@@ -123,7 +123,6 @@ struct ImageRegistrationView: View {
                             
                             // Saves to local
                             UserManager.shared.appendLocalImage(uiImage: uiImage!)
-                            localImages.append(uiImage!)
                         }
                         
                         else {
@@ -182,7 +181,6 @@ struct ImageRegistrationView: View {
                 else if (Calendar.current.isDateInToday((viewModel.user?.userMemories?.dateCreated.last)!)){
                     memoryText = (viewModel.user?.userMemories?.associatedText.last)!
                     if(!localImages.isEmpty){
-                        print("DEBUG2 NotEmpty")
                         self.image = Image(uiImage: localImages.last!)
                     }
                 }

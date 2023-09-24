@@ -29,6 +29,13 @@ struct UserMemories: Codable {
         self.imageUrl[index] = imageUrl
         self.associatedText[index] = associatedText
     }
+    
+    mutating func deleteMemory(){
+        self.dateCreated.removeLast()
+        self.imagePath.removeLast()
+        self.imageUrl.removeLast()
+        self.associatedText.removeLast()
+    }
 }
 
 struct DBUser: Codable {
@@ -117,6 +124,7 @@ struct DBUser: Codable {
 final class UserManager {
     static let shared = UserManager()
     private var localImages = [UIImage]()
+    private var localMemories = UserMemories(dateCreated: [Date](), imagePath: [String](), imageUrl: [String](), associatedText: [String]())
     private init() { }
     
     private let userCollection = Firestore.firestore().collection("users")
@@ -202,6 +210,7 @@ final class UserManager {
             let user = try await getUser(userId: authDataResult.uid)
             
             if let memories = user.userMemories{
+                setLocalMemories(memories: memories)
                 print("DEBUG2 MEMORIES")
                 for path in memories.imagePath{
                     if let image = try? await StorageManager.shared.getImage(userId: user.userId, path: path!){
@@ -220,6 +229,26 @@ final class UserManager {
     }
     
     public func deleteLocalImage(){
-        self.localImages.popLast()
+        self.localImages.removeLast()
+    }
+    
+    public func deleteLocalMemory(){
+        localMemories.deleteMemory()
+    }
+    
+    public func addLocalMemory(dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        localMemories.addMemory(dateCreated: dateCreated, imagePath: imagePath, imageUrl: imageUrl, associatedText: associatedText)
+    }
+    
+    public func setLocalMemoriesValue(index: Int, dateCreated: Date, imagePath: String, imageUrl: String, associatedText: String){
+        localMemories.setMemory(index: index, dateCreated: dateCreated, imagePath: imagePath, imageUrl: imageUrl, associatedText: associatedText)
+    }
+    
+    public func setLocalMemories(memories: UserMemories){
+        localMemories = memories
+    }
+    
+    public func getLocalMemories() -> UserMemories{
+        return localMemories
     }
 }

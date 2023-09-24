@@ -65,6 +65,11 @@ final class ImageViewPickerModel: ObservableObject {
                 user.setMemory(index: (user.userMemories?.dateCreated.count)! - 1, dateCreated: (userM.dateCreated.last)!, imagePath: (userM.imagePath.last)!!, imageUrl: (userM.imageUrl.last)!!, associatedText: text)
             }
             
+            let userM = UserManager.shared.getLocalMemories()
+            
+            UserManager.shared.setLocalMemoriesValue(index: userM.dateCreated.count - 1, dateCreated: (userM.dateCreated.last)!, imagePath: (userM.imagePath.last)!!, imageUrl: (userM.imageUrl.last)!!, associatedText: text)
+            
+            
             addUserMemory(userMemories: user.userMemories!)
         }
     }
@@ -90,6 +95,9 @@ final class ImageViewPickerModel: ObservableObject {
             } else {
                 user.addMemory(dateCreated: Date(), imagePath: path, imageUrl: url.absoluteString, associatedText: text)
             }
+            
+            
+            UserManager.shared.addLocalMemory(dateCreated: Date(), imagePath: path, imageUrl: url.absoluteString, associatedText: text)
             
             addUserMemory(userMemories: user.userMemories!)
             

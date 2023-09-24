@@ -10,7 +10,7 @@ import SwiftUI
 struct CompletedTaskView: View {
     @State private var showingSheet = false
     @StateObject private var viewModel = MemoryViewModel()
-    @Binding var localImages: [UIImage]
+    private var localImages = UserManager.shared.getLocalImages()
     
     var body: some View {
         VStack {
@@ -105,7 +105,7 @@ struct CompletedTaskView: View {
         .foregroundColor(Color("white"))
         .padding()
         .sheet(isPresented: $showingSheet) {
-            ImageRegistrationView(localImages: self.$localImages)
+            ImageRegistrationView()
         }
         .task {
             try? await viewModel.loadCurrentUser()

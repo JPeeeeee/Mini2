@@ -14,11 +14,12 @@ struct MemoryView: View {
     
     var body: some View {
         VStack {
-            if let user = viewModel.user, (user.userMemories?.imageUrl != nil){
+            let localMemories = UserManager.shared.getLocalMemories()
+            if (!localMemories.dateCreated.isEmpty){
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]){
-                ForEach(0..<(UserManager.shared.getLocalImages().count), id: \.self){ index in
+                ForEach(0..<(localMemories.dateCreated.count), id: \.self){ index in
                         NavigationLink{
-                            MemoryDelegate(url: URL(string: (user.userMemories?.imageUrl[index])!), text: (user.userMemories?.associatedText[index])!)
+                            MemoryDelegate(uiImage: UserManager.shared.getLocalImages()[index], text: localMemories.associatedText[index])
                         } label: {
                             ZStack{
                                 if (!UserManager.shared.getLocalImages().isEmpty){
@@ -32,7 +33,7 @@ struct MemoryView: View {
                                     Rectangle().frame(width: 55, height: 46, alignment: .topLeading)
                                         .foregroundColor(.white)
                                     
-                                    if let date = user.userMemories?.dateCreated[index]{
+                                    let date = localMemories.dateCreated[index]
                                         let calendarDate = Calendar.current.dateComponents([.day], from: date)
                                         
                                         VStack (alignment: .center){
@@ -42,7 +43,7 @@ struct MemoryView: View {
                                                 .font(.system(size: 13))
                                         }
                                         .foregroundColor(.black)
-                                    }
+                                    
                                 }
                                 .offset(x: -55, y: -55)
                                 }

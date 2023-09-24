@@ -16,7 +16,6 @@ struct TicketCard: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var firestoreManager: FirestoreManager
-    @Binding var localImages: [UIImage]
     
     private var cardSet: CardSet {
         
@@ -132,7 +131,7 @@ struct TicketCard: View {
         .background(Color("white"))
         .cornerRadius(5)
         .sheet(isPresented: $showingSheet) {
-            ImageRegistrationView(localImages: self.$localImages)
+            ImageRegistrationView()
         }
     }
 }

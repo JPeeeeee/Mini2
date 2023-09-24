@@ -10,7 +10,6 @@ import SwiftUI
 struct TicketCardView: View {
     
     @EnvironmentObject var firestoreManager: FirestoreManager
-    @Binding var localImages: [UIImage]
 
     var body: some View {
         VStack {
@@ -61,7 +60,7 @@ struct TicketCardView: View {
             }
             .padding(.bottom)
             
-            TicketCard(localImages: self.$localImages)
+            TicketCard()
             
             ZStack {
 
