@@ -13,12 +13,12 @@ struct ImageRegistrationView: View {
     @State private var showConfirmationDialogue: Bool = false
     @State private var usingCamera: Bool = false
     @State private var showImagePicker: Bool = false
-    @State private var image: Image? = nil
-    @State var uiImage: UIImage? = nil
+    @State private var image: Image?
+    @State var uiImage: UIImage?
     
     @EnvironmentObject var firestoreManager: FirestoreManager
     @StateObject private var viewModel = ImageViewPickerModel()
-    @State private var url: URL? = nil
+    @State private var url: URL?
     @Binding var localImages: [UIImage]
 
     var body: some View {
@@ -54,6 +54,7 @@ struct ImageRegistrationView: View {
                                         .cornerRadius(20)
                                         .clipped()
                                         .padding()
+                                        .tint(.red)
                                 } placeholder: {
                                     ProgressView()
                                         .scaledToFill()
@@ -123,6 +124,10 @@ struct ImageRegistrationView: View {
                             // Saves to local
                             UserManager.shared.appendLocalImage(uiImage: uiImage!)
                             localImages.append(uiImage!)
+                        }
+                        
+                        else {
+                            viewModel.resaveText(text: memoryText)
                         }
                         
                         dismiss()

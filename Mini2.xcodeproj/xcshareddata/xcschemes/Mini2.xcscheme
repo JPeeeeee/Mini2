@@ -52,7 +52,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-useEmulator YES"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

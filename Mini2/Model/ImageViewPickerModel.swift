@@ -58,6 +58,17 @@ final class ImageViewPickerModel: ObservableObject {
         self.user = user
     }
     
+    func resaveText(text: String){
+        guard var user else { return }
+        Task {
+            if let userM = user.userMemories {
+                user.setMemory(index: (user.userMemories?.dateCreated.count)! - 1, dateCreated: (userM.dateCreated.last)!, imagePath: (userM.imagePath.last)!!, imageUrl: (userM.imageUrl.last)!!, associatedText: text)
+            }
+            
+            addUserMemory(userMemories: user.userMemories!)
+        }
+    }
+    
     func saveProfileImage(image: UIImage, text: String){
         guard var user else { return }
         Task {

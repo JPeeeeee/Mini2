@@ -14,11 +14,11 @@ struct MemoryView: View {
     
     var body: some View {
         VStack {
-            if (viewModel.user?.userMemories?.imageUrl != nil){
+            if let user = viewModel.user, (user.userMemories?.imageUrl != nil){
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]){
                 ForEach(0..<(UserManager.shared.getLocalImages().count), id: \.self){ index in
                         NavigationLink{
-                            MemoryDelegate(url: URL(string: (viewModel.user?.userMemories?.imageUrl[index])!), text: (viewModel.user?.userMemories?.associatedText[index])!)
+                            MemoryDelegate(url: URL(string: (user.userMemories?.imageUrl[index])!), text: (user.userMemories?.associatedText[index])!)
                         } label: {
                             ZStack{
                                 if (!UserManager.shared.getLocalImages().isEmpty){
@@ -32,7 +32,7 @@ struct MemoryView: View {
                                     Rectangle().frame(width: 55, height: 46, alignment: .topLeading)
                                         .foregroundColor(.white)
                                     
-                                    if let date = viewModel.user?.userMemories?.dateCreated[index]{
+                                    if let date = user.userMemories?.dateCreated[index]{
                                         let calendarDate = Calendar.current.dateComponents([.day], from: date)
                                         
                                         VStack (alignment: .center){

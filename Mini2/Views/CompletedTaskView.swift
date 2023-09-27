@@ -54,33 +54,15 @@ struct CompletedTaskView: View {
                 }
             }
             
-            if let user = viewModel.user, Calendar.current.isDateInToday((user.userMemories?.dateCreated.last)!){
-                if (!localImages.isEmpty){
-                    Image(uiImage: localImages.last!)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 250)
-                        .frame(maxWidth: 300)
-                        .clipped()
-                        .padding()
-                }
-            
-                else if let urlString = user.imageUrl, let url = URL(string: urlString){
-                    AsyncImage(url: url){ image in
-                        image.resizable()
-                            .scaledToFill()
-                            .frame(height: 250)
-                            .frame(maxWidth: 300)
-                            .clipped()
-                            .padding()
-                    } placeholder: {
-                        ProgressView()
-                            .scaledToFill()
-                            .frame(height: 250)
-                            .frame(maxWidth: 300)
-                            .padding()
-                    }
-                }
+            // Shows current local image
+            if (!localImages.isEmpty){
+                Image(uiImage: localImages.last!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 250)
+                    .frame(maxWidth: 300)
+                    .clipped()
+                    .padding()
             }
             
             else{
