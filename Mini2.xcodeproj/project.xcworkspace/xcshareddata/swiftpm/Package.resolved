@@ -111,7 +111,7 @@
     {
       "identity" : "wrappinghstack",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dkk/WrappingHStack.git",
+      "location" : "https://github.com/dkk/WrappingHStack",
       "state" : {
         "revision" : "f31b8fdc57759c5aa5fc98c70746db5556e73300",
         "version" : "2.2.10"

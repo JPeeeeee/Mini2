@@ -24,6 +24,7 @@
 		7C34245B2A9CDA7400E77B14 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34245A2A9CDA7400E77B14 /* FilterManager.swift */; };
 		7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */; };
 		7C3424652AA0BA5700E77B14 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7C3424642AA0BA5700E77B14 /* .gitignore */; };
+		CC8C4C722AA0BB5D00FA0BD8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C4C712AA0BB5D00FA0BD8 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		7C34245A2A9CDA7400E77B14 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		7C3424612A9E2C8700E77B14 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7C3424642AA0BA5700E77B14 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		CC8C4C712AA0BB5D00FA0BD8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				7C3424562A9CD76F00E77B14 /* Storage */,
 				7C2742572A964B46001ABC08 /* Mini2App.swift */,
 				7C2742592A964B46001ABC08 /* ContentView.swift */,
+				CC8C4C712AA0BB5D00FA0BD8 /* HomeView.swift */,
 				7C0F6B902A98F531004D0B72 /* FilterScreen.swift */,
 				7C27425B2A964B47001ABC08 /* Assets.xcassets */,
 				7C3424492A9CD52A00E77B14 /* GoogleService-Info.plist */,
@@ -221,6 +224,7 @@
 				7C2742582A964B46001ABC08 /* Mini2App.swift in Sources */,
 				7C3424582A9CD78500E77B14 /* StorageManager.swift in Sources */,
 				7C0F6B912A98F531004D0B72 /* FilterScreen.swift in Sources */,
+				CC8C4C722AA0BB5D00FA0BD8 /* HomeView.swift in Sources */,
 				7C3424622A9E2C8700E77B14 /* FirestoreManager.swift in Sources */,
 				7C0F6B8C2A98F1F9004D0B72 /* FilterButton.swift in Sources */,
 			);
